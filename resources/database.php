@@ -211,4 +211,37 @@ class Database
             $session_expire
         );
     }
+
+    /**
+     * Disconnects the user by deleting the access token.
+     * 
+     * @throws AuthenticationException If the access token is invalid.
+     */
+    public function disconnectUser(): bool
+    {
+        if (!isset($_COOKIE[ACCESS_TOKEN_NAME])) {
+            return false;
+        }
+
+        $access_token = $_COOKIE[ACCESS_TOKEN_NAME];
+
+        if (!$this->verifyUserAccessToken($access_token)) {
+            throw new AuthenticationException();
+        }
+
+        // remove access token from the user
+        $request = 'UPDATE users SET access_token = NULL
+                        WHERE access_token = :access_token';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':access_token', $access_token);
+        $success = $statement->execute();
+
+        // delete the session cookie
+        return $success && setcookie(
+            ACCESS_TOKEN_NAME,
+            '',
+            time() - 3600
+        );
+    }
 }
