@@ -76,6 +76,28 @@ class Database
     }
 
     /**
+     * Verifies the user access token.
+     * 
+     * @param string $access_token
+     * 
+     * @return bool
+     */
+    public function verifyUserAccessToken(
+        string $access_token
+    ): bool {
+        $request = 'SELECT * FROM users
+                        WHERE access_token = :access_token';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':access_token', $access_token);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_OBJ);
+
+        return !empty($result);
+    }
+
+    /**
      * Create an user in the database and return a bool to result.
      * 
      * @param string $name     Name of the user. 
