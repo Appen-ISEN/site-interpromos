@@ -6,6 +6,10 @@
  * @author Youn Mélois <youn@melois.dev>
  */
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Basice parameters to connect to the database
 const DB_SERVER = '127.0.0.1';
 const DB_PORT = '5432';
