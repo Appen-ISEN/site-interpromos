@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PHP version 8.1.0
+ * PHP version 8.1.11
  * 
  * @author Youn Mélois <youn@melois.dev>
  */
@@ -18,4 +18,4 @@ const DB_PASSWORD = '';
 	ex. require_once(LIBRARY_PATH . "Paginator.php")
 */
 defined("LIBRARY_PATH")
-    or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/library'));
+	or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/library'));
