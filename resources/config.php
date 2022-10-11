@@ -13,6 +13,9 @@ const DB_NAME = 'interpromos';
 const DB_USER = 'postgres';
 const DB_PASSWORD = '';
 
+// Some constants to use in the application
+const ACCESS_TOKEN_NAME = 'interpromos_session';
+
 /*
 	Creating constants for heavily used paths makes things a lot easier.
 	ex. require_once(LIBRARY_PATH . "Paginator.php")

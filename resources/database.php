@@ -184,7 +184,7 @@ class Database
 
         // set the session cookie
         return setcookie(
-            'interpromos_session',
+            ACCESS_TOKEN_NAME,
             $access_token,
             $session_expire
         );
