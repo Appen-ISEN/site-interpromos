@@ -137,4 +137,56 @@ class Database
         $statement->bindParam(':email', $email);
         return $statement->execute();
     }
+
+    /**
+     * Connects the user by returning its unique id if the 
+     * credentials are valid.
+     * 
+     * @param string $email
+     * @param string $password
+     * @param int $session_expire (optional) The lifetime of the session cookie in seconds.
+     * 
+     * @throws AuthenticationException If the authentication failed.
+     */
+    public function connectUser(
+        string $email,
+        string $password,
+        int $session_expire = 0
+    ): bool {
+        // test if the credentials are correct
+        if (!$this->verifyUserCredentials($email, $password)) {
+            throw new AuthenticationException();
+        }
+
+        // make email lowercase in case the user used uppercase letters
+        $email = strtolower($email);
+
+        // create a unique token used to identify the user
+        $access_token = hash('sha256', $email . $password . microtime(true));
+
+        // Set session hash on the user
+        $request = 'UPDATE users SET access_token = :access_token
+                        WHERE email = :email';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':access_token', $access_token);
+        $success = $statement->execute();
+
+        // Throw an exception if the update failed
+        if (!$success) {
+            throw new Exception('Failed to connect user.');
+        }
+
+        if ($session_expire > 0) {
+            $session_expire = time() + $session_expire;
+        }
+
+        // set the session cookie
+        return setcookie(
+            'interpromos_session',
+            $access_token,
+            $session_expire
+        );
+    }
 }
