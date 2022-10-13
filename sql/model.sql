@@ -32,7 +32,6 @@ CREATE TABLE teams (
 CREATE TABLE sports (
     id SERIAL PRIMARY KEY,
     name VARCHAR(64) NOT NULL,
-    description TEXT,
 
     UNIQUE (name)
 );

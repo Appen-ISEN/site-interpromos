@@ -373,4 +373,30 @@ class Database
             return false;
         }
     }
+
+    /**
+     * Modify a score for a match and a team
+     * 
+     * @param int $score
+     * @param int $teamid
+     * @param int $matchid
+     * 
+     * @return bool true = no problem and false = problem
+     */
+    public function modifyScore(int $score, int $teamid, int $matchid): bool {
+        try {
+            $request = 'UPDATE participations set score = :score 
+                where team_id = :team_id and match_id = :match_id';
+
+            $statement = $this->PDO->prepare($request);
+            $statement->bindParam(':score', $score);
+            $statement->bindParam(':team_id', $teamid);
+            $statement->bindParam(':match_id', $matchid);
+            $statement->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
