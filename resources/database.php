@@ -311,4 +311,66 @@ class Database
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Create a team
+     * 
+     * @param String $name of the team
+     * 
+     * @return bool true = no problem and false = problem
+     */
+    public function createTeam(String $name): bool {
+        try {
+            $request = 'INSERT into teams ("name") values (:name)';
+
+            $statement = $this->PDO->prepare($request);
+            $statement->bindParam(':name', $name);
+            $statement->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Create a match 
+     * 
+     * @param int $teamA_id 
+     * @param int $teamB_id
+     * @param int $sportid
+     * @param int $type of the match ex:  0 pool, 1 final, 2: semi-final, ...
+     * 
+     * @return bool true = no problem and false = problem
+     */
+    public function createMatch(int $teamA_id, int $teamB_id, int $sportid, int $type): bool {
+        try {
+            $request_match = 'INSERT into matches (sport_id, "type") values (:sportid , :type_) RETURNING id';
+
+            $statementMatch = $this->PDO->prepare($request_match);
+            $statementMatch->bindParam(":sportid", $sportid);
+            $statementMatch->bindParam(":type_", $type);
+            $statementMatch->execute();
+
+            $matchId = $statementMatch->fetch(PDO::FETCH_OBJ)->id;
+
+            $request_teamA = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
+
+            $statementTeamA = $this->PDO->prepare($request_teamA);
+            $statementTeamA->bindParam(":team_id", $teamA_id);
+            $statementTeamA->bindParam(":match_id", $matchId);
+            $statementTeamA->execute();
+
+            $request_teamB = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
+
+            $statementTeamB = $this->PDO->prepare($request_teamA);
+            $statementTeamB->bindParam(":team_id", $teamB_id);
+            $statementTeamB->bindParam(":match_id", $matchId);
+            $statementTeamB->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
