@@ -79,7 +79,7 @@
 
             $matchScore = $db->getMatchScore($matchid);
 
-            http_response_code(404);
+            http_response_code(200);
 		    die(json_encode($matchScore));
         default:
 		http_response_code(404);
