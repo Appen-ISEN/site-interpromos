@@ -74,6 +74,13 @@
     }
 
     switch ($pathInfo[0] . $_SERVER['REQUEST_METHOD']) {
+        case 'match' . 'GET' :
+            $matchid = $_GET['id'];
+
+            $matchScore = $db->getMatchScore($matchid);
+
+            http_response_code(404);
+		    die(json_encode($matchScore));
         default:
 		http_response_code(404);
 		die();

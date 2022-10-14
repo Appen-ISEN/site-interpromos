@@ -295,6 +295,24 @@ class Database
     }
 
     /**
+     * Gets the score for each team on the match
+     * 
+     * @param int $id of the match 
+     * 
+     * @return ?array return null if the match don't exist
+     */
+    public function getMatchScore(int $id) : ?array {
+        $request = 'SELECT t.name "team_name", score from participations 
+                        left join teams t on team_id = t.id where match_id = :id';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Gets all teams for a match
      * 
      * @param int $id of the match
