@@ -86,13 +86,22 @@
                 APIErrors::internalError();
             }
         case 'matchs' . 'GET' :
-            $matchs = $db->getAllMatches();
+            if (empty($_GET['sport_id'])){
+                $matchs = $db->getAllMatches();
 
-            if ($matchs != NULL){
-                http_response_code(200);
-		        die(json_encode($matchs));
+                if ($matchs != NULL){
+                    http_response_code(200);
+                    die(json_encode($matchs));
+                }else{
+                    APIErrors::internalError();}
             }else{
-                APIErrors::internalError();
+                $matchs = $db->getAllMatchesSport($_GET['sport_id']);
+
+                if ($matchs != NULL){
+                    http_response_code(200);
+                    die(json_encode($matchs));
+                }else{
+                    APIErrors::internalError();}
             }
         case 'test' . 'GET' :
             
