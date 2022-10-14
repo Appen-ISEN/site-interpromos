@@ -15,7 +15,7 @@ const DB_SERVER = '127.0.0.1';
 const DB_PORT = '5432';
 const DB_NAME = 'interpromos';
 const DB_USER = 'postgres';
-const DB_PASSWORD = '';
+const DB_PASSWORD = 'new_password';
 
 // Some constants to use in the application
 const ACCESS_TOKEN_NAME = 'interpromos_session';
