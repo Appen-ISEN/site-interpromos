@@ -277,6 +277,23 @@ class Database
     }
 
     /**
+     * Gets all matches in the db with their type
+     * 
+     * @return ?array return null if there is no match in the db
+     */
+    public function getAllMatches(): ?array {
+        $request = 'SELECT m.id, sport_id, s.name "sport_name", type, array_agg(p.team_id) "teams_id" from matches m 
+                        left join sports s on sport_id = s.id
+                        right join participations p on match_id = m.id 
+                        group by m.id, s.name';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Gets all infor of a match 
      * 
      * @param int $id
