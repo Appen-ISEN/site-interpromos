@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
     try {
         $success = $db->createUser($name, $email, $password);
         if ($success) {
-            redirect('user.php');
+            redirect('admin.php');
         }
     } catch (AuthenticationException $e) {
         // pass
@@ -50,6 +50,7 @@ if (isset($_POST['register'])) {
         <input type="password" name="password" id="password" required />
         <input type="submit" name="register" value="S'inscrire" />
     </form>
+    <a href="login.php">Se connecter</a>
 </body>
 
 </html>
