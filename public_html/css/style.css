@@ -1,3 +1,8 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 body{
   background-color: rgb(37, 37, 37);
 }
@@ -31,36 +36,28 @@ body{
       margin-right: auto
     }
 
-  .vertical_menu {
+  .menu {
       background-color: rgb(44, 43, 43);
       width: 80%;
       margin:auto;
     }
 
 
-  .vertical_menu a {
+  .menu a {
       color: rgb(193, 193, 193);
       display: block;
       padding: 7%;
       text-decoration: none;
     }
     
-  .vertical_menu a:hover {
+  .menu a:hover {
       background-color: rgb(103, 99, 99);
     }
     
-  .vertical_menu a.active {
+  .menu a.active {
       background-color: #a62020;
       color: rgb(215, 212, 212);
     }
-
-  .Sign{
-    position:fixed;
-    bottom: 3px;
-    right: -6px;
-    padding: auto;
-    width: 3%;
-  }
 }
 
 @media only screen and ( orientation: landscape) {
@@ -89,7 +86,7 @@ body{
   }
 
 
-  .vertical_menu {
+  .menu {
     background-color: rgb(44, 43, 43);
     margin-top: 1%;
     width: 38%;
@@ -98,26 +95,19 @@ body{
   }
   
   
-  .vertical_menu a {
+  .menu a {
     color: rgb(193, 193, 193);
     display: block;
     padding: 7%;
     text-decoration: none;
   }
 
-  .vertical_menu a:hover {
+  .menu a:hover {
     background-color: rgb(103, 99, 99);
   }
   
-.vertical_menu a.active {
+.menu a.active {
     background-color: #a62020;
     color: rgb(215, 212, 212);
   }
-
-.Sign{
-  position:fixed;
-  bottom: 10px;
-  right: 3px;
-  width: 1.5%;
-}
 }

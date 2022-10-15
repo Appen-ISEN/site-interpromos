@@ -1,42 +1,34 @@
+<?php
+
+/**
+ * PHP version 8.1.11
+ * 
+ * @author Valentin Hervé <valentinherve60@gmail.com>
+ */
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <title>Accueil</title>
+        <link href="public_html/css/style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="container"></div>
+        <img src="public_html/img/InterPromo.png">
+        <input class="ButtonDayNight" type="image" src="public_html/img/DAYnNGH.png" onclick="switchDarkMode()" />
+        <div class="vertical_menu menu">
+            <a href="#" class="active">Acceuil</a>
+            <a href="score.php?sport=basket">Basket</a>
+            <a href="score.php?sport=handball">Handball</a>
+            <a href="score.php?sport=badminton">Badminton</a>
+            <a href="score.php?sport=volley">Volley</a>
+            <a href="score.php?sport=futsal">Futsal</a>
+        </div>
 
-<body>
-    <link href="public_html/css/style.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <div class="container"></div>
-    <img src="public_html/img/InterPromo.png">
-    <input class="ButtonDayNight" type="image" src="public_html/img/DAYnNGH.png" onclick="myFunction()" />
-    <script>
-        window.IsDark = 0;
+        <script src="public_html/js/script.js"></script>
+    </body>
 
-        function myFunction() {
-            document.body.classList.toggle("LightMode");
-            if (window.IsDark == 0) {
-                document.querySelector('.vertical_menu').style.backgroundColor = 'rgb(211, 211, 211)';
-                var Choices = document.querySelectorAll('.vertical_menu a');
-                Choices.forEach(choice => {
-                    choice.style.color = 'rgb(14, 14, 14)';
-                });
-                window.IsDark = 1;
-                console.log("White")
-            } else {
-                document.querySelector('.vertical_menu').style.backgroundColor = 'rgb(44, 43, 43)';
-                var Choices = document.querySelectorAll('.vertical_menu a');
-                Choices.forEach(choice => {
-                    choice.style.color = 'rgb(193, 193, 193)';
-                });
-                window.IsDark = 0;
-                console.log("Dark");
-            }
-        }
-    </script>
-    <div class="vertical_menu" name="MenuV">
-        <a href="#" class="active">Acceuil</a>
-        <a href="#">Basket</a>
-        <a href="#">Hand</a>
-        <a href="#">Bad</a>
-        <a href="#">Volley</a>
-        <a href="#">Futsal</a>
-    </div>
-</body>
+</hmtl>
