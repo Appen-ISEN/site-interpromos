@@ -51,7 +51,137 @@
             </div>
 
             <div id="frame">
+                <div class="quarter-finals round">
+                    <h1 class="round-title">Quarts de finale</h1>
+                    <div class="match">
+                        <div class="team winner">
+                            <p class="seed">#1</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">5</p>
+                        </div>
+                        <div class="team loser">
+                            <p class="seed">#8</p>
+                            <p class="promo">Profs</p>
+                            <p class="team-name">La dream team</p>
+                            <p class="team-score">3</p>
+                        </div>
+                    </div>
+                    <div class="match">
+                        <div class="team loser">
+                            <p class="seed">#4</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">2</p>
+                        </div>
+                        <div class="team winner">
+                            <p class="seed">#5</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">8</p>
+                        </div>
+                    </div>
+                    <div class="match">
+                        <div class="team">
+                            <p class="seed">#2</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">0</p>
+                        </div>
+                        <div class="team">
+                            <p class="seed">#7</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">1</p>
+                        </div>
+                    </div>
+                    <div class="match">
+                        <div class="team winner">
+                            <p class="seed">#3</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">2</p>
+                        </div>
+                        <div class="team loser">
+                            <p class="seed">#6</p>
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">1</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="braces">
+                    <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace">
+                    <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace">
+                </div>
+
+                <div class="semi-finals round">
+                    <h1 class="round-title">Demi-finales</h1>
+                    <div class="match">
+                        <div class="team">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">2</p>
+                        </div>
+                        <div class="team">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">2</p>
+                        </div>
+                    </div>
+                    <div class="match">
+                        <div class="team">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">3</p>
+                        </div>
+                        <div class="team">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="braces">
+                    <img src="public_html/img/brace.png" alt="Brace" class="brace semi-brace">
+                </div>
+
+                <div class="final round">
+                    <h1 class="round-title">Finale</h1>
+                    <div class="match">
+                        <div class="team gold-medal winner">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">5</p>
+                        </div>
+                        <div class="team silver-medal loser">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="braces"><p> </p>
+                </div>
+
+                <div class="bronze-medal-game round">
+                    <h1 class="round-title">Petite finale</h1>
+                    <div class="match">
+                        <div class="team bronze-medal winner">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">3</p>
+                        </div>
+                        <div class="team loser">
+                            <p class="promo">A3</p>
+                            <p class="team-name">Les ravagés</p>
+                            <p class="team-score">1</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

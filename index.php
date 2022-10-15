@@ -20,7 +20,7 @@
         <img src="public_html/img/InterPromo.png">
         <input class="ButtonDayNight" type="image" src="public_html/img/DAYnNGH.png" onclick="switchDarkMode()" />
         <div class="vertical_menu menu">
-            <a href="#" class="active">Acceuil</a>
+            <a href="" class="active">Acceuil</a>
             <a href="score.php?sport=basket">Basket</a>
             <a href="score.php?sport=handball">Handball</a>
             <a href="score.php?sport=badminton">Badminton</a>
