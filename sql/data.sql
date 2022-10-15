@@ -1,8 +1,18 @@
+/*******************************************************************************
+Creation Date:  2022-10-13
+Author:         Maxence Laurent <nano0@duck.com>
+Author:         Youn Mélois <youn@melois.dev>
+Description:    Creates the database tables and relations.
+Usage:          psql -U postgres -d interpromos -a -f data.sql
+                https://stackoverflow.com/a/23992045/12619942
+*******************************************************************************/
+
 DELETE FROM sports;
 DELETE FROM users;
 
+-- Populate sports table
 ALTER SEQUENCE sports_id_seq RESTART;
-INSERT INTO sports ("name") values
+INSERT INTO sports ("name") VALUES
 ('Basket'),
 ('Hand'),
 ('Bad'),
