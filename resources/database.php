@@ -252,7 +252,8 @@ class Database
      * 
      * @return ?arry return null if the sport_id don't exist
      */
-    public function getSportInfo(int $id): ?array {
+    public function getSportInfo(int $id): ?array
+    {
         $request = 'SELECT name, description from sports where id = :id';
 
         $statement = $this->PDO->prepare($request);
@@ -267,7 +268,8 @@ class Database
      * 
      * @return ?array return null if there is no sport in the db
      */
-    public function getSports(): ?Array {
+    public function getSports(): ?array
+    {
         $request = 'SELECT id, name from sports';
 
         $statement = $this->PDO->prepare($request);
@@ -281,7 +283,8 @@ class Database
      * 
      * @return ?array return null if there is no match in the db
      */
-    public function getAllMatches(): ?array {
+    public function getAllMatches(): ?array
+    {
         $request = 'SELECT m.id, sport_id, s.name "sport_name", type, array_agg(p.team_id) "teams_id" from matches m 
                         left join sports s on sport_id = s.id
                         right join participations p on match_id = m.id 
@@ -300,7 +303,8 @@ class Database
      * 
      * @return ?array return null is there is no match in the db
      */
-    public function getAllMatchesSport(int $sportId): ?array {
+    public function getAllMatchesSport(int $sportId): ?array
+    {
         $request = 'SELECT m.id, type, array_agg(p.team_id) "teams_id" from matches m
                         left join sports s on sport_id = s.id
                         right join participations p on match_id = m.id
@@ -319,8 +323,9 @@ class Database
      * @param int $id
      * 
      * @return ?array return null if the match_id don't exist
-    */
-    public function getMatchInfo(int $id): ?array {
+     */
+    public function getMatchInfo(int $id): ?array
+    {
         $request = 'SELECT m.id, s.name "sport_name", m.type from matches m 
                         left join sports s on sport_id = s.id where m.id = :id';
 
@@ -338,7 +343,8 @@ class Database
      * 
      * @return ?array return null if the match don't exist
      */
-    public function getMatchScore(int $id) : ?array {
+    public function getMatchScore(int $id): ?array
+    {
         $request = 'SELECT t.name "team_name", score from participations 
                         left join teams t on team_id = t.id where match_id = :id';
 
@@ -356,7 +362,8 @@ class Database
      * 
      * @return ?array return null if there no team on the match
      */
-    public function getTeamsOnMatch(int $id): ?array {
+    public function getTeamsOnMatch(int $id): ?array
+    {
         $request = 'SELECT t.name "team_name", team_id, score from participations 
                         left join teams t on team_id = t.id where match_id = :id';
 
@@ -374,7 +381,8 @@ class Database
      * 
      * @return bool true = no problem and false = problem
      */
-    public function createTeam(String $name): bool {
+    public function createTeam(String $name): bool
+    {
         try {
             $request = 'INSERT into teams ("name") values (:name)';
 
@@ -398,7 +406,8 @@ class Database
      * 
      * @return bool true = no problem and false = problem
      */
-    public function createMatch(int $teamA_id, int $teamB_id, int $sportid, int $type): bool {
+    public function createMatch(int $teamA_id, int $teamB_id, int $sportid, int $type): bool
+    {
         try {
             $request_match = 'INSERT into matches (sport_id, "type") values (:sportid , :type_) RETURNING id';
 
@@ -438,7 +447,8 @@ class Database
      * 
      * @return bool true = no problem and false = problem
      */
-    public function modifyScore(int $score, int $teamid, int $matchid): bool {
+    public function modifyScore(int $score, int $teamid, int $matchid): bool
+    {
         try {
             $request = 'UPDATE participations set score = :score 
                 where team_id = :team_id and match_id = :match_id';
