@@ -18,7 +18,7 @@ if (isset($_COOKIE[ACCESS_TOKEN_NAME])) {
     $access_token = $_COOKIE[ACCESS_TOKEN_NAME];
     $success = $db->verifyUserAccessToken($access_token);
     if ($success) {
-        redirect('user.php');
+        redirect('admin.php');
     }
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
     try {
         $success = $db->connectUser($email, $password);
         if ($success) {
-            redirect('user.php');
+            redirect('admin.php');
         }
     } catch (AuthenticationException $e) {
         // pass
