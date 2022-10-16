@@ -7,12 +7,8 @@
     */
 
     $sport = "";
-    $phase = "poule";
     if(isset($_GET["sport"])){
         $sport = $_GET["sport"];
-    }
-    if(isset($_GET["phase"])){
-        $phase = $_GET["phase"];
     }
 
 ?>
@@ -23,7 +19,7 @@
     <head>
         <title>
             <?php
-                echo $sport." : ".$phase;
+                echo $sport;
             ?>
         </title>
         <link href="public_html/css/style.css" rel="stylesheet">
@@ -37,16 +33,16 @@
             <div id="content">
                 <div class="horizontal_menu menu" id="sport_selection">
                     <a href="index.php">Acceuil</a>
-                    <a href="score.php?sport=basket&phase=<?php echo $phase; ?>" <?php if($sport == "basket"){ echo "class=\"active\" ";} ?>>Basket</a>
-                    <a href="score.php?sport=handball&phase=<?php echo $phase; ?>" <?php if($sport == "handball"){ echo "class=\"active\" ";} ?>>Handball</a>
-                    <a href="score.php?sport=badminton&phase=<?php echo $phase; ?>" <?php if($sport == "badminton"){ echo "class=\"active\" ";} ?>>Badminton</a>
-                    <a href="score.php?sport=volley&phase=<?php echo $phase; ?>" <?php if($sport == "volley"){ echo "class=\"active\" ";} ?>>Volley</a>
-                    <a href="score.php?sport=futsal&phase=<?php echo $phase; ?>" <?php if($sport == "futsal"){ echo "class=\"active\" ";} ?>>Futsal</a>
+                    <a href="score.php?sport=basket" <?php if($sport == "basket"){ echo "class=\"active\" ";} ?>>Basket</a>
+                    <a href="score.php?sport=handball" <?php if($sport == "handball"){ echo "class=\"active\" ";} ?>>Handball</a>
+                    <a href="score.php?sport=badminton" <?php if($sport == "badminton"){ echo "class=\"active\" ";} ?>>Badminton</a>
+                    <a href="score.php?sport=volley" <?php if($sport == "volley"){ echo "class=\"active\" ";} ?>>Volley</a>
+                    <a href="score.php?sport=futsal" <?php if($sport == "futsal"){ echo "class=\"active\" ";} ?>>Futsal</a>
                 </div>
                 <hr>
                 <div class="horizontal_menu menu" id="phase">
-                    <a href="score.php?sport=<?php echo $sport; ?>&phase=poule" <?php if($phase == "poule"){ echo "class=\"active\" ";} ?>>Phases de poule</a>
-                    <a href="score.php?sport=<?php echo $sport; ?>&phase=arbre" <?php if($phase == "arbre"){ echo "class=\"active\" ";} ?>>Phases éliminatoires</a>
+                    <p id="group-phase-button" class="active">Phases de poule</p>
+                    <p id="bracket-phase-button">Phases éliminatoires</p>
                 </div>
 
                 <div class="frame" id="bracket"> <!-- --------------------------------------------------------------------------------------------------- -->

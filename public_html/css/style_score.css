@@ -24,7 +24,7 @@
     margin: 0;
 }
 
-.horizontal_menu a{
+.horizontal_menu a, .horizontal_menu p{
     padding: 15px 0 15px 0;
     width: 16.666%;
     text-align: center;
@@ -45,7 +45,7 @@
     bottom: 10px;
 }
 
-#phase a{
+#phase p{
     width: 50%;
 }
 
