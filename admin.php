@@ -56,6 +56,12 @@ if (isset($_POST['edit_match'])) {
     $db->modifyScore($team2_score, $team2_id, $match_id);
 }
 
+if (isset($_POST['delete_match'])) {
+    $match_id = $_POST['match_id'];
+
+    $db->deleteMatch($match_id);
+}
+
 $match_types = array(
     "0" => "Poule",
     "1" => "Finale",
@@ -136,6 +142,12 @@ $match_types = array(
                                     <input type='submit' value='Modifier' name='edit_match' />
                                 </td>
                             </form>
+                            <td>
+                                <form method="POST">
+                                    <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
+                                    <input type="submit" value="Supprimer" name="delete_match" />
+                                </form>
+                            </td>
                         </tr>
                     <?php } ?>
                     <tr>
