@@ -21,30 +21,105 @@
     $teams_poules = array();
 
     $matchs_poules = array();
+    $matchs_eight = array();
     $matchs_quarters = array();
     $matchs_semis = array();
     $matchs_final = array();
     $matchs_little_final = array();
-    foreach($db->getMatches() as $match){
-        if(strtolower($match["sport_name"]) == strtolower($sport)){
-            switch($match["type"]){
-                case 0:
-                    array_push($matchs_poules, $match);
-                    break;
-                case 1:
-                    array_push($matchs_final, $match);
-                    break;
-                case 2:
-                    array_push($matchs_semis, $match);
-                    break;
-                case 3:
-                    array_push($matchs_quarters, $match);
-                    break;
-                case 4:
-                    array_push($matchs_little_final, $match);
-                    break;
-                default:
-                    break;
+    if($sport == "badminton"){
+        foreach($db->getMatches() as $match){
+            $matchs_eight1 = array();
+            $matchs_eight2 = array();
+            $matchs_quarters1 = array();
+            $matchs_quarters2 = array();
+            $matchs_semis1 = array();
+            $matchs_semis2 = array();
+            $matchs_final1 = array();
+            $matchs_final2 = array();
+            $matchs_final3 = array();   
+            if(strtolower($match["sport_name"]) == strtolower($sport)."1"){
+                switch($match["type"]){
+                    case 0:
+                        break;
+                    case 1:
+                        array_push($matchs_final3, $match);
+                        break;
+                    case 2:
+                        array_push($matchs_final1, $match);
+                        break;
+                    case 3:
+                        array_push($matchs_semis1, $match);
+                        break;
+                    case 4:
+                        array_push($matchs_little_final, $match);
+                        break;
+                    case 5:
+                        array_push($matchs_quarters1, $match);
+                        break;
+                    case 6:
+                        array_push($matchs_eight1, $match);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if(strtolower($match["sport_name"]) == strtolower($sport)."2"){
+                switch($match["type"]){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        array_push($matchs_final2, $match);
+                        break;
+                    case 3:
+                        array_push($matchs_semis2, $match);
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        array_push($matchs_quarters2, $match);
+                        break;
+                    case 6:
+                        array_push($matchs_eight2, $match);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            array_push($matchs_eight, $matchs_eight1);
+            array_push($matchs_eight, $matchs_eight2);
+            array_push($matchs_quarters, $matchs_quarters1);
+            array_push($matchs_quarters, $matchs_quarters2);
+            array_push($matchs_semis, $matchs_semis1);
+            array_push($matchs_semis, $matchs_semis2);
+            array_push($matchs_final, $matchs_final1);
+            array_push($matchs_final, $matchs_final2);
+            array_push($matchs_final, $matchs_final3);
+        }
+    }
+    else{
+        foreach($db->getMatches() as $match){
+            if(strtolower($match["sport_name"]) == strtolower($sport)){
+                switch($match["type"]){
+                    case 0:
+                        array_push($matchs_poules, $match);
+                        break;
+                    case 1:
+                        array_push($matchs_final, $match);
+                        break;
+                    case 2:
+                        array_push($matchs_semis, $match);
+                        break;
+                    case 3:
+                        array_push($matchs_quarters, $match);
+                        break;
+                    case 4:
+                        array_push($matchs_little_final, $match);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -91,11 +166,24 @@
                 </div>
                 <hr>
                 <div class="horizontal_menu menu" id="phase">
-                    <p id="group-phase-button" class="color-main active">Phases de poule</p>
-                    <p id="bracket-phase-button" class="bgcolor-btnprimary color-main">Phases éliminatoires</p>
+                    <?php 
+                        if($sport == "badminton"){
+                            echo "<p id=\"group1-button\" class=\"bgcolor-btnprimary color-main active\">Éliminatoires, groupe 1</p>
+                                <p id=\"group2-button\" class=\"bgcolor-btnprimary color-main\">Éliminatoires, groupe 2</p>
+                                <p id=\"final-button\" class=\"bgcolor-btnprimary color-main\">Finales</p>";
+                        }
+                        else{
+                            echo "<p id=\"group-phase-button\" class=\"bgcolor-btnprimary color-main active\">Phases de poule</p>
+                                <p id=\"bracket-phase-button\" class=\"bgcolor-btnprimary color-main\">Phases éliminatoires</p>";
+                        }
+                    ?>
                 </div>
 
-                <div class="frame" id="bracket"> <!-- --------------------------------------------------------------------------------------------------- -->
+                <?php
+                    if($sport != "badminton"){
+                ?>
+
+                <div class="frame bracket" id="bracket"> <!-- --------------------------------------------------------------------------------------------------- -->
                     
                     <?php
                         if(sizeof($matchs_quarters) > 0 || sizeof($matchs_final) == 0 && sizeof($matchs_semis) == 0 && sizeof($matchs_little_final) == 0){
@@ -350,6 +438,397 @@
                         ?>
                     </div>
                 </div>
+
+                <?php
+                    }
+                    else{
+                        for($k = 1; $k < 3; $k++){
+                ?>
+
+                <div class="frame bracket" id="bracket-16-<?php echo $k; ?>"> <!-- --------------------------------------------------------------------------------------------------- -->
+
+                    <div class="eight-finals round">
+                        <h1 class="round-title">16èmes de finale</h1>
+
+                        <?php
+                            for($i = 0; $i < 8; $i++){
+                                echo "<div class=\"match";
+                                if($i == 7){
+                                    echo " no-margin";
+                                }
+                                echo "\">";
+                                if(sizeof($matchs_eight[$k]) >= $i + 1){
+                                    $team1;
+                                    $team2;
+                                    foreach($allteams as $team){
+                                        if($team["id"] == json_decode($matchs_eight[$k][$i]["teams_id"])[0]){
+                                            $team1 = $team;
+                                        }
+                                        if($team["id"] == json_decode($matchs_eight[$k][$i]["teams_id"])[1]){
+                                            $team2 = $team;
+                                        }
+                                    }
+
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_eight[$k][$i]["scores"])[0] > json_decode($matchs_eight[$k][$i]["scores"])[1]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_eight[$k][$i]["scores"])[0] < json_decode($matchs_eight[$k][$i]["scores"])[1]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_eight[$k][$i]["scores"])[0]."</p>";
+                                    echo "</div>";
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_eight[$k][$i]["scores"])[1] > json_decode($matchs_eight[$k][$i]["scores"])[0]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_eight[$k][$i]["scores"])[1] < json_decode($matchs_eight[$k][$i]["scores"])[0]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_eight[$k][$i]["scores"])[1]."</p>";
+                                    echo "</div>";
+                                }
+                                else{
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                }
+                                echo "</div>";
+                            }
+                        ?>
+                    </div>
+
+                    <div class="braces">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace no-margin">
+                    </div>
+
+                    <div class="quarter-finals round">
+                        <h1 class="round-title">8èmes de finale</h1>
+
+                        <?php
+                            for($i = 0; $i < 4; $i++){
+                                echo "<div class=\"match";
+                                if($i == 3){
+                                    echo " no-margin";
+                                }
+                                echo "\">";
+                                if(sizeof($matchs_quarters[$k]) >= $i + 1){
+                                    $team1;
+                                    $team2;
+                                    foreach($allteams as $team){
+                                        if($team["id"] == json_decode($matchs_quarters[$k][$i]["teams_id"])[0]){
+                                            $team1 = $team;
+                                        }
+                                        if($team["id"] == json_decode($matchs_quarters[$k][$i]["teams_id"])[1]){
+                                            $team2 = $team;
+                                        }
+                                    }
+
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_quarters[$k][$i]["scores"])[0] > json_decode($matchs_quarters[$k][$i]["scores"])[1]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_quarters[$k][$i]["scores"])[0] < json_decode($matchs_quarters[$k][$i]["scores"])[1]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k][$i]["scores"])[0]."</p>";
+                                    echo "</div>";
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_quarters[$k][$i]["scores"])[1] > json_decode($matchs_quarters[$k][$i]["scores"])[0]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_quarters[$k][$i]["scores"])[1] < json_decode($matchs_quarters[$k][$i]["scores"])[0]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k][$i]["scores"])[1]."</p>";
+                                    echo "</div>";
+                                }
+                                else{
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                }
+                                echo "</div>";
+                            }
+                        ?>
+                    </div>
+
+                    <div class="braces">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace no-margin">
+                    </div>
+
+                    <div class="semi-finals round">
+                        <h1 class="round-title">Quarts de finale</h1>
+                        
+                        <?php
+                            for($i = 0; $i < 2; $i++){
+                                echo "<div class=\"match";
+                                if($i == 1){
+                                    echo " no-margin";
+                                }
+                                echo "\">";
+                                if(sizeof($matchs_semis[$k]) >= $i + 1){
+                                    $team1;
+                                    $team2;
+                                    foreach($allteams as $team){
+                                        if($team["id"] == json_decode($matchs_semis[$k][$i]["teams_id"])[0]){
+                                            $team1 = $team;
+                                        }
+                                        if($team["id"] == json_decode($matchs_semis[$k][$i]["teams_id"])[1]){
+                                            $team2 = $team;
+                                        }
+                                    }
+
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_semis[$k][$i]["scores"])[0] > json_decode($matchs_semis[$k][$i]["scores"])[1]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_semis[$k][$i]["scores"])[0] < json_decode($matchs_semis[$k][$i]["scores"])[1]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_semis[$k][$i]["scores"])[0]."</p>";
+                                    echo "</div>";
+
+                                    echo "<div class=\"team";
+                                    if(json_decode($matchs_semis[$k][$i]["scores"])[1] > json_decode($matchs_semis[$k][$i]["scores"])[0]){
+                                        echo " winner";
+                                    }
+                                    elseif(json_decode($matchs_semis[$k][$i]["scores"])[1] < json_decode($matchs_semis[$k][$i]["scores"])[0]){
+                                        echo " loser";
+                                    }
+                                    echo "\">";
+                                    echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_semis[$k][$i]["scores"])[1]."</p>";
+                                    echo "</div>";
+                                }
+                                else{
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                    echo "<div class=\"team\">";
+                                    echo "<p class=\"team-name\">-</p>";
+                                    echo "<p class=\"team-score\">-</p>";
+                                    echo "</div>";
+                                }
+                                echo "</div>";
+                            }
+                        ?>
+
+                    </div>
+
+                    <div class="braces">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace semi-brace">
+                    </div>
+
+                    <div class="final round">
+                        <h1 class="round-title">Demi-finales</h1>
+                        <?php
+                            echo "<div class=\"match\">";
+                            if(sizeof($matchs_final[$k]) >= 1){
+                                $team1;
+                                $team2;
+                                foreach($allteams as $team){
+                                    if($team["id"] == json_decode($matchs_final[$k][0]["teams_id"])[0]){
+                                        $team1 = $team;
+                                    }
+                                    if($team["id"] == json_decode($matchs_final[$k][0]["teams_id"])[1]){
+                                        $team2 = $team;
+                                    }
+                                }
+
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_final[$k][0]["scores"])[0] > json_decode($matchs_final[$k][0]["scores"])[1]){
+                                    echo " gold-medal winner";
+                                }
+                                elseif(json_decode($matchs_final[$k][0]["scores"])[0] < json_decode($matchs_final[$k][0]["scores"])[1]){
+                                    echo " silver-medal loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_final[$k][0]["scores"])[0]."</p>";
+                                echo "</div>";
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_final[$k][0]["scores"])[1] > json_decode($matchs_final[$k][0]["scores"])[0]){
+                                    echo " gold-medal winner";
+                                }
+                                elseif(json_decode($matchs_final[$k][0]["scores"])[1] < json_decode($matchs_final[$k][0]["scores"])[0]){
+                                    echo " silver-medal loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_final[$k][0]["scores"])[1]."</p>";
+                                echo "</div>";
+                            }
+                            else{
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
+                        ?>
+                    </div>
+                </div>
+
+                <?php
+                    }       
+                ?>
+
+                <div class="frame bracket" id="bracket-finals"> <!-- --------------------------------------------------------------------------------------------------- -->
+
+                    <div class="final round">
+                        <h1 class="round-title">Finale</h1>
+                        <?php
+                            echo "<div class=\"match\">";
+                            if(sizeof($matchs_final[3]) >= 1){
+                                $team1;
+                                $team2;
+                                foreach($allteams as $team){
+                                    if($team["id"] == json_decode($matchs_final[3][0]["teams_id"])[0]){
+                                        $team1 = $team;
+                                    }
+                                    if($team["id"] == json_decode($matchs_final[3][0]["teams_id"])[1]){
+                                        $team2 = $team;
+                                    }
+                                }
+
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_final[3][0]["scores"])[0] > json_decode($matchs_final[3][0]["scores"])[1]){
+                                    echo " gold-medal winner";
+                                }
+                                elseif(json_decode($matchs_final[3][0]["scores"])[0] < json_decode($matchs_final[3][0]["scores"])[1]){
+                                    echo " silver-medal loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_final[3][0]["scores"])[0]."</p>";
+                                echo "</div>";
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_final[3][0]["scores"])[1] > json_decode($matchs_final[3][0]["scores"])[0]){
+                                    echo " gold-medal winner";
+                                }
+                                elseif(json_decode($matchs_final[3][0]["scores"])[1] < json_decode($matchs_final[3][0]["scores"])[0]){
+                                    echo " silver-medal loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_final[3][0]["scores"])[1]."</p>";
+                                echo "</div>";
+                            }
+                            else{
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
+                        ?>
+                    </div>
+
+                    <div class="braces"><p> </p>
+                    </div>
+
+                    <div class="bronze-medal-game round">
+                        <h1 class="round-title">Petite finale</h1>
+                        <?php
+                            echo "<div class=\"match\">";
+                            if(sizeof($matchs_little_final) >= 1){
+                                $team1;
+                                $team2;
+                                foreach($allteams as $team){
+                                    if($team["id"] == json_decode($matchs_little_final[0]["teams_id"])[0]){
+                                        $team1 = $team;
+                                    }
+                                    if($team["id"] == json_decode($matchs_little_final[0]["teams_id"])[1]){
+                                        $team2 = $team;
+                                    }
+                                }
+
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_little_final[0]["scores"])[0] > json_decode($matchs_little_final[0]["scores"])[1]){
+                                    echo " bronze-medal winner";
+                                }
+                                elseif(json_decode($matchs_little_final[0]["scores"])[0] < json_decode($matchs_little_final[0]["scores"])[1]){
+                                    echo " loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team1["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_little_final[0]["scores"])[0]."</p>";
+                                echo "</div>";
+
+                                echo "<div class=\"team";
+                                if(json_decode($matchs_little_final[0]["scores"])[1] > json_decode($matchs_little_final[0]["scores"])[0]){
+                                    echo " bronze-medal winner";
+                                }
+                                elseif(json_decode($matchs_little_final[0]["scores"])[1] < json_decode($matchs_little_final[0]["scores"])[0]){
+                                    echo " loser";
+                                }
+                                echo "\">";
+                                echo "<p class=\"team-name\">".$team2["name"]."</p>";
+                                echo "<p class=\"team-score\">".json_decode($matchs_little_final[0]["scores"])[1]."</p>";
+                                echo "</div>";
+                            }
+                            else{
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                                echo "<div class=\"team\">";
+                                echo "<p class=\"team-name\">-</p>";
+                                echo "<p class=\"team-score\">-</p>";
+                                echo "</div>";
+                            }
+                            echo "</div>";
+                        ?>
+                    </div>
+                </div>
+
+                <?php
+                    }            
+                ?>
 
                 <div class="frame bgcolor-main" id="poules"> <!-- --------------------------------------------------------------------------------------------------- -->
                     <table class="color-main">

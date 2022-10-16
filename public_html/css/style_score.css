@@ -57,7 +57,7 @@ hr{
 
 /* BRACKET section --------------------------------------------------------------------------------------------------------- */
 
-#bracket{
+.bracket{
     height: max-content;
     display: flex;
     flex-direction: row;
@@ -173,7 +173,7 @@ hr{
     margin-top: 219px;
 }
 
-#bracket{
+.bracket{
     display:none;
 }
 
@@ -203,7 +203,7 @@ table th, table td{
 }
 
 @media (max-width: 1250px) {
-    #bracket {
+    .bracket {
       overflow-x: scroll;
       justify-content:flex-start;
     }
@@ -238,7 +238,7 @@ table th, table td{
     #content{
         overflow-y: scroll;
     }
-    #bracket{
+    .bracket{
         height: 520px;
     }
 }
