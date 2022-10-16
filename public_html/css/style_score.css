@@ -124,6 +124,18 @@ hr{
     background-color: rgb(255, 189, 189);
 }
 
+.gold-medal .team-name{
+    background-image: url("../img/gold.jpg");
+}
+
+.silver-medal .team-name{
+    background-image: url("../img/silver.jpg");
+}
+
+.bronze-medal .team-name{
+    background-image: url("../img/bronze.jpg");
+}
+
 
 
 .brace{
