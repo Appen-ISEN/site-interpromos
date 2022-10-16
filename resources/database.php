@@ -277,6 +277,24 @@ class Database
     }
 
     /**
+     * Get all the matches in the database
+     * 
+     * @return ?array return null if there is no match in the db
+     */
+    public function getMatches(): ?array {
+        $request = 'SELECT m.id "id", m.type "type", s.name "sport_name", ARRAY_TO_JSON(ARRAY_AGG(p.team_id)) "teams_id", ARRAY_TO_JSON(ARRAY_AGG(p.score)) "scores", m.date "date"
+                        FROM matches m
+                        LEFT JOIN sports s ON m.sport_id = s.id
+                        INNER JOIN participations p ON m.id = p.match_id
+                        GROUP BY m.id, s.name';
+                    
+        $statement = $this->PDO->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Gets all matches in the db with their type
      * 
      * @return ?array return null if there is no match in the db
@@ -389,6 +407,33 @@ class Database
     }
 
     /**
+     * Gets all teams in the db
+     * 
+     * @return ?array return null if there is no team in the db
+     */
+    public function getTeams(): ?array {
+        $request = 'SELECT t.id, t.name FROM teams t';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Gets the team name according to the id
+     */
+    public function getTeamName(int $id): ?string {
+        $request = 'SELECT name from teams where id = :id';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_OBJ)->name;
+    }
+
+    /**
      * Create a match 
      * 
      * @param int $teamA_id 
@@ -398,35 +443,34 @@ class Database
      * 
      * @return bool true = no problem and false = problem
      */
-    public function createMatch(int $teamA_id, int $teamB_id, int $sportid, int $type): bool {
-        try {
-            $request_match = 'INSERT into matches (sport_id, "type") values (:sportid , :type_) RETURNING id';
+    public function createMatch(int $teamA_id, int $teamB_id, int $sportid, int $type, string $datetime): bool {
+        $success = true;
 
-            $statementMatch = $this->PDO->prepare($request_match);
-            $statementMatch->bindParam(":sportid", $sportid);
-            $statementMatch->bindParam(":type_", $type);
-            $statementMatch->execute();
+        $request_match = 'INSERT into matches (sport_id, "type", "date") values (:sportid , :type, :date) RETURNING id';
 
-            $matchId = $statementMatch->fetch(PDO::FETCH_OBJ)->id;
+        $statementMatch = $this->PDO->prepare($request_match);
+        $statementMatch->bindParam(":sportid", $sportid);
+        $statementMatch->bindParam(":type", $type);
+        $statementMatch->bindParam(":date", $datetime);
+        $success = $statementMatch->execute() && $success;
 
-            $request_teamA = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
+        $matchId = $statementMatch->fetch(PDO::FETCH_OBJ)->id;
 
-            $statementTeamA = $this->PDO->prepare($request_teamA);
-            $statementTeamA->bindParam(":team_id", $teamA_id);
-            $statementTeamA->bindParam(":match_id", $matchId);
-            $statementTeamA->execute();
+        $request_teamA = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
 
-            $request_teamB = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
+        $statementTeamA = $this->PDO->prepare($request_teamA);
+        $statementTeamA->bindParam(":team_id", $teamA_id);
+        $statementTeamA->bindParam(":match_id", $matchId);
+        $success = $statementTeamA->execute() && $success;
 
-            $statementTeamB = $this->PDO->prepare($request_teamA);
-            $statementTeamB->bindParam(":team_id", $teamB_id);
-            $statementTeamB->bindParam(":match_id", $matchId);
-            $statementTeamB->execute();
+        $request_teamB = 'INSERT into participations (team_id, match_id) values (:team_id, :match_id)';
 
-            return true;
-        } catch (PDOException $e) {
-            return false;
-        }
+        $statementTeamB = $this->PDO->prepare($request_teamB);
+        $statementTeamB->bindParam(":team_id", $teamB_id);
+        $statementTeamB->bindParam(":match_id", $matchId);
+        $success = $statementTeamB->execute() && $success;
+
+        return $success;
     }
 
     /**
