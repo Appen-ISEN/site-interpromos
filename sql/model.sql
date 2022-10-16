@@ -25,7 +25,9 @@ CREATE TABLE users (
 -- Table teams
 CREATE TABLE teams (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(64) NOT NULL
+    name VARCHAR(64) NOT NULL,
+
+    UNIQUE (name)
 );
 
 -- Table sports
