@@ -5,3 +5,4 @@ function resizeContent(){
 window.onresize = resizeContent;
 
 resizeContent();
+

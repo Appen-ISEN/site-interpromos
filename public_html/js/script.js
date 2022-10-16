@@ -11,6 +11,10 @@ function switchDarkMode() {
         Choices.forEach(choice => {
             choice.style.color = 'rgb(14, 14, 14)';
         });
+        var bgcolor_main = document.getElementsByClassName("bgcolor-main");
+        for(let i = 0; i < bgcolor_main.length; i++){
+            bgcolor_main[i].style.backgroundColor = 'rgb(240, 240, 240)';
+        }
         window.IsDark = 1;
     } else {
         var menus = document.getElementsByClassName('menu');
@@ -21,6 +25,10 @@ function switchDarkMode() {
         Choices.forEach(choice => {
             choice.style.color = 'rgb(193, 193, 193)';
         });
+        var bgcolor_main = document.getElementsByClassName("bgcolor-main");
+        for(let i = 0; i < bgcolor_main.length; i++){
+            bgcolor_main[i].style.backgroundColor = 'rgb(37, 37, 37)';
+        }
         window.IsDark = 0;
     }
 }

@@ -1,7 +1,18 @@
+/* COLORS ------------------------------------------------------------------- */
+.bgcolor-main{
+    background-color: rgb(37, 37, 37);
+}
+
+/* --------------------------------- */
+
+#main_container{
+    display: flex;
+}
+
 #content{
     float: right;
-    width: 60%;
-    margin-right: 5%;
+    width: 74%;
+    margin-right: 2%;
     height: 100%;
     overflow: hidden;
 }
@@ -19,8 +30,19 @@
     text-align: center;
 }
 
-img{
-    width: 25%;
+#logo{
+    width: 20%;
+    height: fit-content;
+    float: none;
+    padding: 0;
+    margin: 0 2% 0 2%;
+    align-self: center;
+}
+
+.ButtonDayNight{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
 }
 
 #phase a{
@@ -35,20 +57,21 @@ hr{
     margin: 0.5% 0 0.5% 0;
 }
 
-#frame{
-    height: 70%;
-    background-color: rgb(255, 255, 255);
-    margin: 5% 0 5% 0;
+.frame{
+    height: 74%;
+    margin: 3% 0 3% 0;
     overflow: scroll;
     /*vertical-align: middle;*/
 }
 
 /* BRACKET section --------------------------------------------------------------------------------------------------------- */
 
-#frame{
+#bracket{
     display: flex;
     flex-direction: row;
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
 }
 
 .team{
@@ -145,4 +168,29 @@ hr{
 
 .final .match, .bronze-medal-game .match{
     margin-top: 219px;
+}
+
+#bracket{
+    display:none;
+}
+
+/* POULES SECTION ------------------------------------------------------------------------------------------------ */
+
+#poules{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table{
+    color: white;
+    font-size: 20px;
+}
+
+table th, table td{
+    width: 85px;
+    padding: 5px;
+    border: 1px solid white;
+    margin: 0;
 }
