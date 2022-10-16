@@ -37,27 +37,15 @@ body{
     }
 
   .menu {
-      background-color: rgb(44, 43, 43);
       width: 80%;
       margin:auto;
     }
 
 
   .menu a, .menu p {
-      color: rgb(193, 193, 193);
       display: block;
       padding: 7%;
       text-decoration: none;
-    }
-    
-  .menu a:hover, .menu p:hover {
-      background-color: rgb(103, 99, 99);
-      cursor: pointer;
-    }
-    
-  .menu a.active, .menu p:active {
-      background-color: #a62020;
-      color: rgb(215, 212, 212);
     }
 }
 
@@ -88,7 +76,6 @@ body{
 
 
   .menu {
-    background-color: rgb(44, 43, 43);
     margin-top: 1%;
     width: 38%;
     float: right;
@@ -97,19 +84,8 @@ body{
   
   
   .menu a, .menu p {
-    color: rgb(193, 193, 193);
     display: block;
     padding: 7%;
     text-decoration: none;
-  }
-
-  .menu a:hover, .menu p:hover {
-    background-color: rgb(103, 99, 99);
-    cursor: pointer;
-  }
-  
-.menu a.active, .menu p.active {
-    background-color: #a62020;
-    color: rgb(215, 212, 212);
   }
 }

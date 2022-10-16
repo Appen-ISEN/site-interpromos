@@ -24,6 +24,7 @@
         </title>
         <link href="public_html/css/style.css" rel="stylesheet">
         <link href="public_html/css/style_score.css" rel="stylesheet">
+        <link href="public_html/css/colors.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body class="bgcolor-main">
@@ -32,17 +33,17 @@
 
             <div id="content">
                 <div class="horizontal_menu menu" id="sport_selection">
-                    <a href="index.php">Acceuil</a>
-                    <a href="score.php?sport=basket" <?php if($sport == "basket"){ echo "class=\"active\" ";} ?>>Basket</a>
-                    <a href="score.php?sport=handball" <?php if($sport == "handball"){ echo "class=\"active\" ";} ?>>Handball</a>
-                    <a href="score.php?sport=badminton" <?php if($sport == "badminton"){ echo "class=\"active\" ";} ?>>Badminton</a>
-                    <a href="score.php?sport=volley" <?php if($sport == "volley"){ echo "class=\"active\" ";} ?>>Volley</a>
-                    <a href="score.php?sport=futsal" <?php if($sport == "futsal"){ echo "class=\"active\" ";} ?>>Futsal</a>
+                    <a href="index.php" class="bgcolor-btnprimary color-main">Acceuil</a>
+                    <a href="score.php?sport=basket" class="color-main<?php if($sport == "basket"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Basket</a>
+                    <a href="score.php?sport=handball" class="color-main<?php if($sport == "handball"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Handball</a>
+                    <a href="score.php?sport=badminton" class="color-main<?php if($sport == "badminton"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Badminton</a>
+                    <a href="score.php?sport=volley" class="color-main<?php if($sport == "volley"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Volley</a>
+                    <a href="score.php?sport=futsal" class="color-main<?php if($sport == "futsal"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Futsal</a>
                 </div>
                 <hr>
                 <div class="horizontal_menu menu" id="phase">
-                    <p id="group-phase-button" class="active">Phases de poule</p>
-                    <p id="bracket-phase-button">Phases éliminatoires</p>
+                    <p id="group-phase-button" class="color-main active">Phases de poule</p>
+                    <p id="bracket-phase-button" class="bgcolor-btnprimary color-main">Phases éliminatoires</p>
                 </div>
 
                 <div class="frame" id="bracket"> <!-- --------------------------------------------------------------------------------------------------- -->
@@ -180,97 +181,97 @@
                 </div>
 
                 <div class="frame bgcolor-main" id="poules"> <!-- --------------------------------------------------------------------------------------------------- -->
-                    <table>
+                    <table class="color-main">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>A1-CIR</th>
-                                <th>A1-CSI</th>
-                                <th>A2-CIR</th>
-                                <th>A2-CSI</th>
-                                <th>A3</th>
-                                <th>M1</th>
-                                <th>M2</th>
-                                <th>Rang</th>
+                            <tr class="bgcolor-tableprimary">
+                                <th class="bordercolor-main"></th>
+                                <th class="bordercolor-main">A1-CIR</th>
+                                <th class="bordercolor-main">A1-CSI</th>
+                                <th class="bordercolor-main">A2-CIR</th>
+                                <th class="bordercolor-main">A2-CSI</th>
+                                <th class="bordercolor-main">A3</th>
+                                <th class="bordercolor-main">M1</th>
+                                <th class="bordercolor-main">M2</th>
+                                <th class="bordercolor-main">Rang</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>A1-CIR</th>
-                                <th>X</th>
-                                <th>3-2</th>
-                                <th>2-5</th>
-                                <th>4-2</th>
-                                <th>0-0</th>
-                                <th>4-3</th>
-                                <th>1-8</th>
-                                <th>5</th>
+                            <tr class="bgcolor-tablesecondary">
+                                <td class="bordercolor-main">A1-CIR</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">5</td>
                             </tr>
-                            <tr>
-                                <th>A1-CSI</th>
-                                <th>7-5</th>
-                                <th>X</th>
-                                <th>2-5</th>
-                                <th>4-2</th>
-                                <th>0-0</th>
-                                <th>4-3</th>
-                                <th>1-8</th>
-                                <th>1</th>
+                            <tr class="bgcolor-tableprimary">
+                                <td class="bordercolor-main">A1-CSI</td>
+                                <td class="bordercolor-main">7-5</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">1</td>
                             </tr>
-                            <tr>
-                                <th>A2-CIR</th>
-                                <th>7-5</th>
-                                <th>3-2</th>
-                                <th>X</th>
-                                <th>4-2</th>
-                                <th>0-0</th>
-                                <th>4-3</th>
-                                <th>1-8</th>
-                                <th>3</th>
+                            <tr class="bgcolor-tablesecondary">
+                                <td class="bordercolor-main">A2-CIR</td>
+                                <td class="bordercolor-main">7-5</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">3</td>
                             </tr>
-                            <tr>
-                                <th>A2-CSI</th>
-                                <th>1-2</th>
-                                <th>3-2</th>
-                                <th>2-5</th>
-                                <th>X</th>
-                                <th>0-0</th>
-                                <th>4-3</th>
-                                <th>1-8</th>
-                                <th>6</th>
+                            <tr class="bgcolor-tableprimary">
+                                <td class="bordercolor-main">A2-CSI</td>
+                                <td class="bordercolor-main">1-2</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">6</td>
                             </tr>
-                            <tr>
-                                <th>A3</th>
-                                <th>0-0</th>
-                                <th>3-2</th>
-                                <th>2-5</th>
-                                <th>4-2</th>
-                                <th>X</th>
-                                <th>4-3</th>
-                                <th>1-8</th>
-                                <th>2</th>
+                            <tr class="bgcolor-tablesecondary">
+                                <td class="bordercolor-main">A3</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">2</td>
                             </tr>
-                            <tr>
-                                <th>M1</th>
-                                <th>1-2</th>
-                                <th>3-2</th>
-                                <th>2-5</th>
-                                <th>4-2</th>
-                                <th>0-0</th>
-                                <th>X</th>
-                                <th>1-8</th>
-                                <th>4</th>
+                            <tr class="bgcolor-tableprimary">
+                                <td class="bordercolor-main">M1</td>
+                                <td class="bordercolor-main">1-2</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">1-8</td>
+                                <td class="bordercolor-main">4</td>
                             </tr>
-                            <tr>
-                                <th>M2</th>
-                                <th>8-4</th>
-                                <th>3-2</th>
-                                <th>2-5</th>
-                                <th>4-2</th>
-                                <th>0-0</th>
-                                <th>4-3</th>
-                                <th>X</th>
-                                <th>7</th>
+                            <tr class="bgcolor-tablesecondary">
+                                <td class="bordercolor-main">M2</td>
+                                <td class="bordercolor-main">8-4</td>
+                                <td class="bordercolor-main">3-2</td>
+                                <td class="bordercolor-main">2-5</td>
+                                <td class="bordercolor-main">4-2</td>
+                                <td class="bordercolor-main">0-0</td>
+                                <td class="bordercolor-main">4-3</td>
+                                <td class="bordercolor-main">X</td>
+                                <td class="bordercolor-main">7</td>
                             </tr>
                         </tbody>
                     </table>
