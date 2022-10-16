@@ -106,7 +106,11 @@
 
                         <?php
                             for($i = 0; $i < 4; $i++){
-                                echo "<div class=\"match\">";
+                                echo "<div class=\"match";
+                                if($i == 3){
+                                    echo " no-margin";
+                                }
+                                echo "\">";
                                 if(sizeof($matchs_quarters) >= $i + 1){
                                     $team1;
                                     $team2;
@@ -161,7 +165,7 @@
 
                     <div class="braces">
                         <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace">
-                        <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace quarters-brace no-margin">
                     </div>
 
                     <?php } ?>
@@ -171,7 +175,11 @@
                         
                         <?php
                             for($i = 0; $i < 2; $i++){
-                                echo "<div class=\"match\">";
+                                echo "<div class=\"match";
+                                if($i == 1){
+                                    echo " no-margin";
+                                }
+                                echo "\">";
                                 if(sizeof($matchs_semis) >= $i + 1){
                                     $team1;
                                     $team2;
