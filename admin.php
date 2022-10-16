@@ -45,6 +45,17 @@ if (isset($_POST['add_match'])) {
     }
 }
 
+if (isset($_POST['edit_match'])) {
+    $match_id = $_POST['match_id'];
+    $team1_id = $_POST['team1_id'];
+    $team2_id = $_POST['team2_id'];
+    $team1_score = $_POST['team1_score'];
+    $team2_score = $_POST['team2_score'];
+
+    $db->modifyScore($team1_score, $team1_id, $match_id);
+    $db->modifyScore($team2_score, $team2_id, $match_id);
+}
+
 $match_types = array(
     "0" => "Poule",
     "1" => "Finale",
@@ -104,56 +115,69 @@ $match_types = array(
                         <th>Score B</th>
                         <th>Date</th>
                     </tr>
-                    <?php
-                    foreach ($db->getMatches() as $match) {
-                        echo "<tr>";
-                        echo "<td>" . $match['id'] . "</td>";
-                        echo "<td>" . $match_types[$match['type']] . "</td>";
-                        echo "<td>" . $match['sport_name'] . "</td>";
+                    <?php foreach ($db->getMatches() as $match) {
                         $teams = json_decode($match['teams_id']);
-                        echo "<td>" . $db->getTeamName($teams[0]) . "</td>";
-                        echo "<td>" . $db->getTeamName($teams[1]) . "</td>";
                         $scores = json_decode($match['scores']);
-                        echo "<td>" . $scores[0] . "</td>";
-                        echo "<td>" . $scores[1] . "</td>";
-                        echo "<td>" . $match['date'] . "</td>";
-                        echo "</tr>";
-                    }
                     ?>
+                        <tr>
+                            <form method='POST'>
+                                <td><?php echo $match['id']; ?></td>
+                                <td><?php echo $match_types[$match['type']]; ?></td>
+                                <td><?php echo $match['sport_name']; ?></td>
+                                <td><?php echo $db->getTeamName($teams[0]); ?></td>
+                                <td><?php echo $db->getTeamName($teams[1]); ?></td>
+                                <td><input type="number" name="team1_score" value="<?php echo $scores[0]; ?>" /></td>
+                                <td><input type="number" name="team2_score" value="<?php echo $scores[1]; ?>" /></td>
+                                <td><?php echo $match['date']; ?></td>
+                                <td>
+                                    <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
+                                    <input type="hidden" value="<?php echo $teams[0]; ?>" name="team1_id" />
+                                    <input type="hidden" value="<?php echo $teams[1]; ?>" name="team2_id" />
+                                    <input type='submit' value='Modifier' name='edit_match' />
+                                </td>
+                            </form>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <form method="POST">
+                            <td></td>
+                            <td>
+                                <select name="type">
+                                    <?php foreach ($match_types as $key => $value) {
+                                        echo "<option value='$key'>$value</option>";
+                                    } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="sport">
+                                    <?php foreach ($sports as $sport) {
+                                        echo "<option value='" . $sport['id'] . "'>" . $sport['name'] . "</option>";
+                                    } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="team1">
+                                    <?php foreach ($db->getTeams() as $team) {
+                                        echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
+                                    } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="team2">
+                                    <?php foreach ($db->getTeams() as $team) {
+                                        echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
+                                    } ?>
+                                </select>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td><input type="datetime-local" name="datetime" /></td>
+                            <td><input type="submit" value="Ajouter Match" name="add_match" /></td>
+                        </form>
+
+                        </form>
+                    </tr>
                 </table>
-                <form method="POST">
-                    <select name="team1">
-                        <?php
-                        foreach ($db->getTeams() as $team) {
-                            echo "<option value=\"" . $team['id'] . "\">" . $team['name'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="team2">
-                        <?php
-                        foreach ($db->getTeams() as $team) {
-                            echo "<option value=\"" . $team['id'] . "\">" . $team['name'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="sport">
-                        <?php
-                        foreach ($sports as $sport) {
-                            echo "<option value=\"" . $sport['id'] . "\">" . $sport['name'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                    <select name="type">
-                        <!-- 0: pool, 1: final, 2: semi-final, 3: quarter-final, 4: eighth-final -->
-                        <option value="0">Poule</option>
-                        <option value="1">Finale</option>
-                        <option value="2">Demi-finale</option>
-                        <option value="3">Quart de finale</option>
-                        <option value="4">Huitième de finale</option>
-                    </select>
-                    <input type="datetime-local" name="datetime" />
-                    <input type="submit" value="Ajouter Match" name="add_match" />
-                </form>
     </table>
     </td>
     </tr>
