@@ -103,9 +103,9 @@ $match_types = array(
         <tbody>
             <?php foreach ($db->getTeams() as $team) { ?>
                 <tr>
-                    <td><?php echo $team['id']; ?></td>
+                    <td style="width: 40px;"><?php echo $team['id']; ?></td>
                     <td><?php echo $team['name']; ?></td>
-                    <td>
+                    <td style="width: 50px;">
                         <form method="POST">
                             <input type="hidden" name="team_id" value="<?php echo $team['id']; ?>" />
                             <input type="submit" name="delete_team" value="Supprimer" />
@@ -141,22 +141,22 @@ $match_types = array(
             ?>
                 <tr>
                     <form method='POST'>
-                        <td><?php echo $match['id']; ?></td>
+                        <td style="width: 40px;"><?php echo $match['id']; ?></td>
                         <td><?php echo $match_types[$match['type']]; ?></td>
                         <td><?php echo $match['sport_name']; ?></td>
                         <td><?php echo $db->getTeamName($teams[0]); ?></td>
                         <td><?php echo $db->getTeamName($teams[1]); ?></td>
-                        <td><input type="number" name="team1_score" value="<?php echo $scores[0]; ?>" /></td>
-                        <td><input type="number" name="team2_score" value="<?php echo $scores[1]; ?>" /></td>
+                        <td style="width: 100px;"><input type="number" name="team1_score" value="<?php echo $scores[0]; ?>" style="width: 60px;" /></td>
+                        <td style="width: 100px;"><input type="number" name="team2_score" value="<?php echo $scores[1]; ?>" style="width: 60px;" /></td>
                         <td><?php echo $match['date']; ?></td>
-                        <td>
+                        <td style="width: 50px;">
                             <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
                             <input type="hidden" value="<?php echo $teams[0]; ?>" name="team1_id" />
                             <input type="hidden" value="<?php echo $teams[1]; ?>" name="team2_id" />
                             <input type='submit' value='Modifier' name='edit_match' />
                         </td>
                     </form>
-                    <td>
+                    <td style="width: 50px;">
                         <form method="POST">
                             <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
                             <input type="submit" value="Supprimer" name="delete_match" />
