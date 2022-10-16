@@ -18,7 +18,7 @@ if (isset($_COOKIE[ACCESS_TOKEN_NAME])) {
     $access_token = $_COOKIE[ACCESS_TOKEN_NAME];
     $success = $db->verifyUserAccessToken($access_token);
     if ($success) {
-        redirect('user.php');
+        redirect('admin.php');
     }
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
     try {
         $success = $db->connectUser($email, $password);
         if ($success) {
-            redirect('user.php');
+            redirect('admin.php');
         }
     } catch (AuthenticationException $e) {
         // pass
@@ -54,7 +54,6 @@ if (isset($_POST['login'])) {
         <input type="password" name="password" id="password" required />
         <input type="submit" name="login" value="Se connecter" />
     </form>
-    <a href="register.php">Créer un compte</a>
 </body>
 
 </html>

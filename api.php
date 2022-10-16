@@ -79,8 +79,32 @@
 
             $matchScore = $db->getMatchScore($matchid);
 
-            http_response_code(200);
-		    die(json_encode($matchScore));
+            if ($matchScore != NULL){
+                http_response_code(200);
+		        die(json_encode($matchScore));
+            }else{
+                APIErrors::internalError();
+            }
+        case 'matchs' . 'GET' :
+            if (empty($_GET['sport_id'])){
+                $matchs = $db->getAllMatches();
+
+                if ($matchs != NULL){
+                    http_response_code(200);
+                    die(json_encode($matchs));
+                }else{
+                    APIErrors::internalError();}
+            }else{
+                $matchs = $db->getAllMatchesSport($_GET['sport_id']);
+
+                if ($matchs != NULL){
+                    http_response_code(200);
+                    die(json_encode($matchs));
+                }else{
+                    APIErrors::internalError();}
+            }
+        case 'test' . 'GET' :
+            
         default:
 		http_response_code(404);
 		die();

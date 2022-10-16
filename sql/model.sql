@@ -25,7 +25,9 @@ CREATE TABLE users (
 -- Table teams
 CREATE TABLE teams (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(64) NOT NULL
+    name VARCHAR(64) NOT NULL,
+
+    UNIQUE (name)
 );
 
 -- Table sports
@@ -41,6 +43,7 @@ CREATE TABLE matches (
     id SERIAL PRIMARY KEY,
     sport_id INTEGER NOT NULL REFERENCES sports(id),
     type SMALLINT NOT NULL DEFAULT 0, -- 0: pool, 1: final, 2: semi-final, 3: quarter-final, 4: eighth-final
+    date TIMESTAMP NOT NULL,
 
     FOREIGN KEY (sport_id) REFERENCES sports(id)
         ON UPDATE CASCADE
