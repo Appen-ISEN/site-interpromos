@@ -6,9 +6,24 @@
       * @author Valentin Hervé <valentinherve60@gmail.com>
     */
 
+    require_once 'resources/config.php';
+    require_once 'resources/database.php';
+
+    $db = new Database();
+    
+
     $sport = "";
     if(isset($_GET["sport"])){
         $sport = $_GET["sport"];
+    }
+
+    $teams = $db->getTeams();
+
+    $matchs = array();
+    foreach($db->getMatches() as $match){
+        if($match["type"] == 0 && strtolower($match["sport_name"]) == strtolower($sport)){
+            array_push($matchs, $match);
+        }
     }
 
 ?>
@@ -185,94 +200,53 @@
                         <thead>
                             <tr class="bgcolor-tableprimary">
                                 <th class="bordercolor-main"></th>
-                                <th class="bordercolor-main">A1-CIR</th>
-                                <th class="bordercolor-main">A1-CSI</th>
-                                <th class="bordercolor-main">A2-CIR</th>
-                                <th class="bordercolor-main">A2-CSI</th>
-                                <th class="bordercolor-main">A3</th>
-                                <th class="bordercolor-main">M1</th>
-                                <th class="bordercolor-main">M2</th>
+                                <?php
+                                    foreach ($teams as $team) {
+                                        echo "<th class=\"bordercolor-main\">".$team["name"]."</th>";
+                                    }
+                                ?>
                                 <th class="bordercolor-main">Rang</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bgcolor-tablesecondary">
-                                <td class="bordercolor-main">A1-CIR</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">5</td>
-                            </tr>
-                            <tr class="bgcolor-tableprimary">
-                                <td class="bordercolor-main">A1-CSI</td>
-                                <td class="bordercolor-main">7-5</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">1</td>
-                            </tr>
-                            <tr class="bgcolor-tablesecondary">
-                                <td class="bordercolor-main">A2-CIR</td>
-                                <td class="bordercolor-main">7-5</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">3</td>
-                            </tr>
-                            <tr class="bgcolor-tableprimary">
-                                <td class="bordercolor-main">A2-CSI</td>
-                                <td class="bordercolor-main">1-2</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">6</td>
-                            </tr>
-                            <tr class="bgcolor-tablesecondary">
-                                <td class="bordercolor-main">A3</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">2</td>
-                            </tr>
-                            <tr class="bgcolor-tableprimary">
-                                <td class="bordercolor-main">M1</td>
-                                <td class="bordercolor-main">1-2</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">1-8</td>
-                                <td class="bordercolor-main">4</td>
-                            </tr>
-                            <tr class="bgcolor-tablesecondary">
-                                <td class="bordercolor-main">M2</td>
-                                <td class="bordercolor-main">8-4</td>
-                                <td class="bordercolor-main">3-2</td>
-                                <td class="bordercolor-main">2-5</td>
-                                <td class="bordercolor-main">4-2</td>
-                                <td class="bordercolor-main">0-0</td>
-                                <td class="bordercolor-main">4-3</td>
-                                <td class="bordercolor-main">X</td>
-                                <td class="bordercolor-main">7</td>
-                            </tr>
+                            
+                            <?php
+                                $i = 0;
+                                foreach ($teams as $team) {
+                                    $color = "primary";
+                                    if($i%2 == 0){
+                                        $color = "secondary";
+                                    }
+                                    echo "<tr class=\"bgcolor-table".$color."\">";
+                                    echo "<td class=\"bordercolor-main\">".$team["name"]."</td>";
+                                        foreach($teams as $team2){
+                                            echo "<td class=\"bordercolor-main\">";
+                                            if($team2 != $team){
+                                                $found = false;
+                                                foreach($matchs as $match){
+                                                    if(json_decode($match["teams_id"])[1] == $team["id"] && json_decode($match["teams_id"])[0] == $team2["id"]){
+                                                        echo json_decode($match["scores"])[1]." - ".json_decode($match["scores"])[0];
+                                                        $found = true;
+                                                    }
+                                                    if(json_decode($match["teams_id"])[0] == $team["id"] && json_decode($match["teams_id"])[1] == $team2["id"]){
+                                                        echo json_decode($match["scores"])[0]." - ".json_decode($match["scores"])[1];
+                                                        $found = true;
+                                                    }
+                                                }
+                                                if(!$found){
+                                                    echo "-";
+                                                }
+                                            }
+                                            else{
+                                                echo "X";
+                                            }
+                                            echo "</td>";
+                                        }
+                                        echo "<td class=\"bordercolor-main\">5</td>";
+                                    echo "</tr>";
+                                    $i++;
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
