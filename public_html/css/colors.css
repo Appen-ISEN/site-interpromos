@@ -38,3 +38,7 @@
 .menu a.active, .menu p.active {
     background-color: #a62020;
 }
+
+.bold{
+    font-weight: bold;
+}
