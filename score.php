@@ -17,7 +17,8 @@
         $sport = $_GET["sport"];
     }
 
-    $teams = $db->getTeams();
+    $allteams = $db->getTeams();
+    $teams = array();
 
     $matchs = array();
     foreach($db->getMatches() as $match){
@@ -26,6 +27,17 @@
         }
     }
 
+    foreach($allteams as $team){
+        $found = false;
+        foreach($matchs as $match){
+            if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
+                $found = true;
+            }
+        }
+        if($found){
+            array_push($teams, $team);
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -199,13 +211,12 @@
                     <table class="color-main">
                         <thead>
                             <tr class="bgcolor-tableprimary">
-                                <th class="bordercolor-main"></th>
+                                <th class="bordercolor-main bold"></th>
                                 <?php
                                     foreach ($teams as $team) {
                                         echo "<th class=\"bordercolor-main\">".$team["name"]."</th>";
                                     }
                                 ?>
-                                <th class="bordercolor-main">Rang</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -218,7 +229,7 @@
                                         $color = "secondary";
                                     }
                                     echo "<tr class=\"bgcolor-table".$color."\">";
-                                    echo "<td class=\"bordercolor-main\">".$team["name"]."</td>";
+                                    echo "<td class=\"bordercolor-main bold\">".$team["name"]."</td>";
                                         foreach($teams as $team2){
                                             echo "<td class=\"bordercolor-main\">";
                                             if($team2 != $team){
@@ -242,7 +253,6 @@
                                             }
                                             echo "</td>";
                                         }
-                                        echo "<td class=\"bordercolor-main\">5</td>";
                                     echo "</tr>";
                                     $i++;
                                 }
