@@ -474,6 +474,18 @@ class Database
     }
 
     /**
+     * Deletes a match
+     */
+    public function deleteMatch(int $id): bool {
+        $request = 'DELETE from matches where id = :id';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(":id", $id);
+
+        return $statement->execute();
+    }
+
+    /**
      * Modify a score for a match and a team
      * 
      * @param int $score
