@@ -282,7 +282,7 @@ class Database
      * @return ?array return null if there is no match in the db
      */
     public function getMatches(): ?array {
-        $request = 'SELECT m.id "id", m.type "type", s.name "sport_name", ARRAY_TO_JSON(ARRAY_AGG(p.team_id)) "teams_id", ARRAY_TO_JSON(ARRAY_AGG(p.score)) "scores", m.date "date"
+        $request = 'SELECT m.id "id", m.type "type", s.name "sport_name", ARRAY_TO_JSON(ARRAY_AGG(p.team_id ORDER BY p.team_id)) "teams_id", ARRAY_TO_JSON(ARRAY_AGG(p.score ORDER BY p.team_id)) "scores", m.date "date"
                         FROM matches m
                         LEFT JOIN sports s ON m.sport_id = s.id
                         INNER JOIN participations p ON m.id = p.match_id
@@ -483,19 +483,13 @@ class Database
      * @return bool true = no problem and false = problem
      */
     public function modifyScore(int $score, int $teamid, int $matchid): bool {
-        try {
-            $request = 'UPDATE participations set score = :score 
-                where team_id = :team_id and match_id = :match_id';
+        $request = 'UPDATE participations set score = :score 
+            where team_id = :team_id and match_id = :match_id';
 
-            $statement = $this->PDO->prepare($request);
-            $statement->bindParam(':score', $score);
-            $statement->bindParam(':team_id', $teamid);
-            $statement->bindParam(':match_id', $matchid);
-            $statement->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            return false;
-        }
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':score', $score);
+        $statement->bindParam(':team_id', $teamid);
+        $statement->bindParam(':match_id', $matchid);
+        return $statement->execute();
     }
 }
