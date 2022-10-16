@@ -148,6 +148,31 @@ hr{
     min-width: 50px;
 }
 
+.margintop{
+    margin-top: 21px !important;
+}
+
+.marg-bonus{
+    margin-top: 71px !important;
+}
+
+.eight-finals .team{
+    font-size: 14px;
+}
+
+.eight-finals p{
+    padding: 5px;
+}
+
+.eight-finals .match{
+    margin: 3px 0 3px 0;
+}
+
+.eight-brace{
+    margin-top: 57px;
+    height: 61px;
+}
+
 
 .quarter-finals .match{
     margin: 40px 0 40px 0;

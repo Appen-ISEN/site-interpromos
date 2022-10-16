@@ -456,6 +456,9 @@
                                 if($i == 7){
                                     echo " no-margin";
                                 }
+                                if($i == 0){
+                                    echo " margintop";
+                                }
                                 echo "\">";
                                 if(sizeof($matchs_eight[$k]) >= $i + 1){
                                     $team1;
@@ -510,7 +513,7 @@
                     </div>
 
                     <div class="braces">
-                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
+                        <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace marg-bonus">
                         <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
                         <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace">
                         <img src="public_html/img/brace.png" alt="Brace" class="brace eight-brace no-margin">
