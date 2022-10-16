@@ -1,0 +1,196 @@
+/* COLORS ------------------------------------------------------------------- */
+.bgcolor-main{
+    background-color: rgb(37, 37, 37);
+}
+
+/* --------------------------------- */
+
+#main_container{
+    display: flex;
+}
+
+#content{
+    float: right;
+    width: 74%;
+    margin-right: 2%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.horizontal_menu{
+    width: 100%;
+    display: flex;
+    float: none;
+    margin: 0;
+}
+
+.horizontal_menu a, .horizontal_menu p{
+    padding: 15px 0 15px 0;
+    width: 16.666%;
+    text-align: center;
+}
+
+#logo{
+    width: 20%;
+    height: fit-content;
+    float: none;
+    padding: 0;
+    margin: 0 2% 0 2%;
+    align-self: center;
+}
+
+.ButtonDayNight{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+#phase p{
+    width: 50%;
+}
+
+#sport_selection{
+    margin-top: 2%;
+}
+
+hr{
+    margin: 0.5% 0 0.5% 0;
+}
+
+.frame{
+    height: 74%;
+    margin: 3% 0 3% 0;
+    overflow: scroll;
+    /*vertical-align: middle;*/
+}
+
+/* BRACKET section --------------------------------------------------------------------------------------------------------- */
+
+#bracket{
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0 0 0;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.team{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    border: 1px solid black;
+    font-size: 15px;
+}
+
+.round p{
+    padding: 10px 0 10px 0;
+}
+
+.round-title{
+    font-size: 20px;
+    text-align: center;
+    color: rgb(29, 5, 95);
+}
+
+.seed{
+    background-color: rgb(0, 10, 145);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 40px;
+    font-weight: bold;
+}
+
+.promo{
+    background-color: rgb(0, 189, 223);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 40px;
+}
+
+.team-name{
+    background-color: rgb(127, 127, 127);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 150px;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.team-score{
+    background-color: rgb(200, 200, 200);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 40px;
+}
+
+.winner .team-score{
+    background-color: rgb(148, 255, 166);
+}
+
+.loser .team-score{
+    background-color: rgb(255, 189, 189);
+}
+
+
+
+.brace{
+    padding: 0;
+    margin: 0;
+    width: 50px;
+}
+
+.braces{
+    display: flex;
+    flex-direction: column;
+    min-width: 50px;
+}
+
+
+.quarter-finals .match{
+    margin: 40px 0 40px 0;
+}
+
+.quarters-brace{
+    margin-top: 100px;
+    height: 121px;
+    margin-bottom: 16px;
+}
+
+.semi-finals .match{
+    margin-top: 100px;
+    margin-bottom: 157px;
+}
+
+.semi-brace{
+    margin-top: 158px;
+    height: 242px;
+}
+
+.final .match, .bronze-medal-game .match{
+    margin-top: 219px;
+}
+
+#bracket{
+    display:none;
+}
+
+/* POULES SECTION ------------------------------------------------------------------------------------------------ */
+
+#poules{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table{
+    color: white;
+    font-size: 20px;
+}
+
+table th, table td{
+    width: 85px;
+    padding: 5px;
+    border: 1px solid white;
+    margin: 0;
+}
