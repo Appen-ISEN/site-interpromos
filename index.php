@@ -16,7 +16,7 @@
         <link href="public_html/css/colors.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body>
+    <body class="bgcolor-main">
         <div class="container"></div>
         <img src="public_html/img/InterPromo.png">
         <input class="ButtonDayNight" type="image" src="public_html/img/DAYnNGH.png" onclick="switchDarkMode()" />
