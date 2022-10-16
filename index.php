@@ -36,38 +36,10 @@
                     <div class="list" id="nowMatch">
                         <h3>Match(s) en cours :</h3>
                         <hr>
-                        <div class="capsule">
-                            <div class="capTeam">
-                                <h3>Team A</h3>
-                                <h4>5</h4>
-                            </div>
-                            <div class="capTeam">
-                                <h3>Team B</h3>
-                                <h4>5</h4>
-                            </div>
-                        </div>
-                        <div class="capsule">
-                            <div class="capTeam">
-                                <h3>Team A</h3>
-                                <h4>5</h4>
-                            </div>
-                            <div class="capTeam">
-                                <h3>Team B</h3>
-                                <h4>5</h4>
-                            </div>
-                        </div>
                     </div>
-                    <div id="nextMatch">
+                    <div class="list" id="nextMatch">
                         <h3>Futurs Matchs :</h3>
                         <hr>
-                        <div class="capsule">
-                            <div>
-                                <h3>Team A</h3>
-                            </div>
-                            <div>
-                                <h3>Team B</h3>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

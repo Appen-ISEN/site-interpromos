@@ -17,7 +17,8 @@ function aspect(matchs) {
             "<div class=\"capTeam\">"+
             "<h3>"+ tname[0] +"</h3></div>"+
             "<div class=\"capTeam\">"+
-            "<h3>"+ tname[1] +"</h3></div></div>";
+            "<h3>"+ tname[1] +"</h3></div>"+
+            match['sport_name'] +"</div>";
 
             $("#nextMatch").append(cap);
         }
@@ -32,7 +33,8 @@ function aspect(matchs) {
             "<h4>"+ tscore[0] + "</h4></div>"+
             "<div class=\"capTeam\">"+
             "<h3>"+ tname[1] +"</h3>"+
-            "<h4>"+ tscore[1] +"</h4></div></div>";
+            "<h4>"+ tscore[1] +"</h4></div>"+
+            match['sport_name'] +"</div>";
 
             $("#nowMatch").append(cap);
         }
@@ -40,3 +42,4 @@ function aspect(matchs) {
 }
 
 getDirect()
+setInterval(getDirect, 300000);
