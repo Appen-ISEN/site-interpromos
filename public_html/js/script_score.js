@@ -18,8 +18,8 @@ group_btn.onclick = function() {
     phase = 1;
     document.getElementById("poules").style.display = "flex";
     document.getElementById("bracket").style.display = "none";
-    bracket_btn.removeAttribute("class");
-    group_btn.setAttribute("class", "active");
+    bracket_btn.setAttribute("class", "bgcolor-btnprimary color-main");
+    group_btn.setAttribute("class", "color-main active");
 }
 
 bracket_btn.onclick = function() {
@@ -29,7 +29,7 @@ bracket_btn.onclick = function() {
     phase = 2;
     document.getElementById("poules").style.display = "none";
     document.getElementById("bracket").style.display = "flex";
-    group_btn.removeAttribute("class");
-    bracket_btn.setAttribute("class", "active");
+    group_btn.setAttribute("class", "bgcolor-btnprimary color-main");
+    bracket_btn.setAttribute("class", "color-main active");
 }
 
