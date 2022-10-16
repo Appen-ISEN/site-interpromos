@@ -84,129 +84,120 @@ $match_types = array(
 <head>
     <meta charset="UTF-8" />
     <title>Interpromos - Administration</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
     <h1>Administration</h1>
     <a href="logout.php">Se déconnecter</a>
-    <table>
-        <tr>
-            <th>Teams</th>
-            <th>Matches</th>
-        </tr>
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                    </tr>
-                    <?php foreach ($db->getTeams() as $team) { ?>
-                        <tr>
-                            <form method="POST">
-                                <td><?php echo $team['id']; ?></td>
-                                <td><?php echo $team['name']; ?></td>
-                                <td>
-                                    <input type="hidden" name="team_id" value="<?php echo $team['id']; ?>" />
-                                    <input type="submit" name="delete_team" value="Supprimer" />
-                                </td>
-                            </form>
-                        </tr>
-                    <?php } ?>
-                    <tr>
+    <table id="table_teams" class="display">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($db->getTeams() as $team) { ?>
+                <tr>
+                    <td><?php echo $team['id']; ?></td>
+                    <td><?php echo $team['name']; ?></td>
+                    <td>
                         <form method="POST">
-                            <td></td>
-                            <td><input type="text" name="name" /></td>
-                            <td><input type="submit" value="Ajouter Team" name="add_team" /></td>
+                            <input type="hidden" name="team_id" value="<?php echo $team['id']; ?>" />
+                            <input type="submit" name="delete_team" value="Supprimer" />
                         </form>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>Type</th>
-                        <th>Sport</th>
-                        <th>Team A</th>
-                        <th>Team B</th>
-                        <th>Score A</th>
-                        <th>Score B</th>
-                        <th>Date</th>
-                    </tr>
-                    <?php foreach ($db->getMatches() as $match) {
-                        $teams = json_decode($match['teams_id']);
-                        $scores = json_decode($match['scores']);
-                    ?>
-                        <tr>
-                            <form method='POST'>
-                                <td><?php echo $match['id']; ?></td>
-                                <td><?php echo $match_types[$match['type']]; ?></td>
-                                <td><?php echo $match['sport_name']; ?></td>
-                                <td><?php echo $db->getTeamName($teams[0]); ?></td>
-                                <td><?php echo $db->getTeamName($teams[1]); ?></td>
-                                <td><input type="number" name="team1_score" value="<?php echo $scores[0]; ?>" /></td>
-                                <td><input type="number" name="team2_score" value="<?php echo $scores[1]; ?>" /></td>
-                                <td><?php echo $match['date']; ?></td>
-                                <td>
-                                    <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
-                                    <input type="hidden" value="<?php echo $teams[0]; ?>" name="team1_id" />
-                                    <input type="hidden" value="<?php echo $teams[1]; ?>" name="team2_id" />
-                                    <input type='submit' value='Modifier' name='edit_match' />
-                                </td>
-                            </form>
-                            <td>
-                                <form method="POST">
-                                    <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
-                                    <input type="submit" value="Supprimer" name="delete_match" />
-                                </form>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <form method="POST">
+        <input type="text" name="name" />
+        <input type="submit" value="Ajouter Team" name="add_team" />
+    </form>
+    <table id="table_matches">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Sport</th>
+                <th>Team A</th>
+                <th>Team B</th>
+                <th>Score A</th>
+                <th>Score B</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($db->getMatches() as $match) {
+                $teams = json_decode($match['teams_id']);
+                $scores = json_decode($match['scores']);
+            ?>
+                <tr>
+                    <form method='POST'>
+                        <td><?php echo $match['id']; ?></td>
+                        <td><?php echo $match_types[$match['type']]; ?></td>
+                        <td><?php echo $match['sport_name']; ?></td>
+                        <td><?php echo $db->getTeamName($teams[0]); ?></td>
+                        <td><?php echo $db->getTeamName($teams[1]); ?></td>
+                        <td><input type="number" name="team1_score" value="<?php echo $scores[0]; ?>" /></td>
+                        <td><input type="number" name="team2_score" value="<?php echo $scores[1]; ?>" /></td>
+                        <td><?php echo $match['date']; ?></td>
+                        <td>
+                            <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
+                            <input type="hidden" value="<?php echo $teams[0]; ?>" name="team1_id" />
+                            <input type="hidden" value="<?php echo $teams[1]; ?>" name="team2_id" />
+                            <input type='submit' value='Modifier' name='edit_match' />
+                        </td>
+                    </form>
+                    <td>
                         <form method="POST">
-                            <td></td>
-                            <td>
-                                <select name="type">
-                                    <?php foreach ($match_types as $key => $value) {
-                                        echo "<option value='$key'>$value</option>";
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="sport">
-                                    <?php foreach ($sports as $sport) {
-                                        echo "<option value='" . $sport['id'] . "'>" . $sport['name'] . "</option>";
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="team1">
-                                    <?php foreach ($db->getTeams() as $team) {
-                                        echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="team2">
-                                    <?php foreach ($db->getTeams() as $team) {
-                                        echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
-                                    } ?>
-                                </select>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td><input type="datetime-local" name="datetime" /></td>
-                            <td><input type="submit" value="Ajouter Match" name="add_match" /></td>
+                            <input type="hidden" value="<?php echo $match['id']; ?>" name="match_id" />
+                            <input type="submit" value="Supprimer" name="delete_match" />
                         </form>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 
-                        </form>
-                    </tr>
-                </table>
+    <form method="POST">
+        <select name="type">
+            <?php foreach ($match_types as $key => $value) {
+                echo "<option value='$key'>$value</option>";
+            } ?>
+        </select>
+        <select name="sport">
+            <?php foreach ($sports as $sport) {
+                echo "<option value='" . $sport['id'] . "'>" . $sport['name'] . "</option>";
+            } ?>
+        </select>
+        <select name="team1">
+            <?php foreach ($db->getTeams() as $team) {
+                echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
+            } ?>
+        </select>
+        <select name="team2">
+            <?php foreach ($db->getTeams() as $team) {
+                echo "<option value='" . $team['id'] . "'>" . $team['name'] . "</option>";
+            } ?>
+        </select>
+        <input type="datetime-local" name="datetime" />
+        <input type="submit" value="Ajouter Match" name="add_match" />
+    </form>
     </table>
-    </td>
-    </tr>
-    </table>
+    <script>
+        $(document).ready(function() {
+            $('#table_teams').DataTable();
+            $('#table_matches').DataTable();
+        });
+    </script>
 </body>
 
 </html>
