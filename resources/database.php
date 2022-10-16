@@ -407,6 +407,22 @@ class Database
     }
 
     /**
+     * Delete a team
+     */
+    public function deleteTeam(int $id): bool {
+        $success = true;
+
+        $request = 'DELETE from teams where id = :id';
+
+        $statement = $this->PDO->prepare($request);
+        $statement->bindParam(':id', $id);
+
+        $success = $statement->execute() && $success;
+
+        return $success;
+    }
+
+    /**
      * Gets all teams in the db
      * 
      * @return ?array return null if there is no team in the db
@@ -423,7 +439,10 @@ class Database
     /**
      * Gets the team name according to the id
      */
-    public function getTeamName(int $id): ?string {
+    public function getTeamName(?int $id): ?string {
+        if ($id == null) {
+            return null;
+        }
         $request = 'SELECT name from teams where id = :id';
 
         $statement = $this->PDO->prepare($request);
