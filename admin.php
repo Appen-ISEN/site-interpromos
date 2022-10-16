@@ -62,6 +62,12 @@ if (isset($_POST['delete_match'])) {
     $db->deleteMatch($match_id);
 }
 
+if (isset($_POST['delete_team'])) {
+    $team_id = $_POST['team_id'];
+
+    $db->deleteTeam($team_id);
+}
+
 $match_types = array(
     "0" => "Poule",
     "1" => "Finale",
@@ -95,19 +101,26 @@ $match_types = array(
                         <th>Id</th>
                         <th>Nom</th>
                     </tr>
-                    <?php
-                    foreach ($db->getTeams() as $team) {
-                        echo "<tr>";
-                        echo "<td>" . $team['id'] . "</td>";
-                        echo "<td>" . $team['name'] . "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
+                    <?php foreach ($db->getTeams() as $team) { ?>
+                        <tr>
+                            <form method="POST">
+                                <td><?php echo $team['id']; ?></td>
+                                <td><?php echo $team['name']; ?></td>
+                                <td>
+                                    <input type="hidden" name="team_id" value="<?php echo $team['id']; ?>" />
+                                    <input type="submit" name="delete_team" value="Supprimer" />
+                                </td>
+                            </form>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <form method="POST">
+                            <td></td>
+                            <td><input type="text" name="name" /></td>
+                            <td><input type="submit" value="Ajouter Team" name="add_team" /></td>
+                        </form>
+                    </tr>
                 </table>
-                <form method="POST">
-                    <input type="text" name="name" />
-                    <input type="submit" value="Ajouter Team" name="add_team" />
-                </form>
             </td>
             <td>
                 <table>
