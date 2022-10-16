@@ -295,15 +295,16 @@ class Database
     }
 
     /**
-     * Gets all matches in the db with their type
+     * Gets all matches in the database
      * 
      * @return ?array return null if there is no match in the db
      */
     public function getAllMatches(): ?array {
-        $request = 'SELECT m.id, sport_id, s.name "sport_name", type, array_agg(p.team_id) "teams_id" from matches m 
-                        left join sports s on sport_id = s.id
-                        right join participations p on match_id = m.id 
-                        group by m.id, s.name';
+        $request = 'SELECT m.id "id", m.type "type", s.name "sport_name", ARRAY_TO_JSON(ARRAY_AGG(t.name ORDER BY p.team_id)) "teams_name", ARRAY_TO_JSON(ARRAY_AGG(p.score ORDER BY p.team_id)) "scores", m.date "date"
+                        FROM matches m
+                        LEFT JOIN sports s ON m.sport_id = s.id
+                        INNER JOIN participations p ON m.id = p.match_id
+                        INNER JOIN teams t ON t.id = p.team_id GROUP BY m.id, s.name ORDER BY m.date';
 
         $statement = $this->PDO->prepare($request);
         $statement->execute();
