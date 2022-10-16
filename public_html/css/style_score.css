@@ -1,11 +1,11 @@
 #main_container{
     display: flex;
+    overflow: hidden;
 }
 
 #content{
     float: right;
     width: 74%;
-    margin-right: 2%;
     height: 100%;
     overflow: hidden;
 }
@@ -36,6 +36,7 @@
     position: absolute;
     left: 10px;
     bottom: 10px;
+    width: 100px;
 }
 
 #phase p{
@@ -53,7 +54,7 @@ hr{
 .frame{
     height: 74%;
     margin: 3% 0 3% 0;
-    overflow: scroll;
+    overflow: hidden;
     /*vertical-align: middle;*/
 }
 
@@ -64,7 +65,6 @@ hr{
     flex-direction: row;
     padding: 20px 0 0 0;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
 }
 
 .team{
@@ -82,7 +82,7 @@ hr{
 .round-title{
     font-size: 20px;
     text-align: center;
-    color: rgb(29, 5, 95);
+    color: rgb(137, 124, 173);
 }
 
 .seed{
@@ -94,14 +94,14 @@ hr{
 }
 
 .promo{
-    background-color: rgb(0, 189, 223);
+    background-color: rgb(129, 129, 129);
     color: rgb(0, 0, 0);
     text-align: center;
     width: 40px;
 }
 
 .team-name{
-    background-color: rgb(127, 127, 127);
+    background-color: rgb(236, 236, 236);
     color: rgb(0, 0, 0);
     text-align: center;
     width: 150px;
@@ -186,4 +186,75 @@ table th, table td{
     padding: 5px;
     margin: 0;
     text-align: center;
+}
+
+@media (max-width: 1525px) {
+    #bracket {
+      overflow-x: scroll;
+      justify-content:flex-start;
+    }
+}
+
+@media (max-width: 700px) {
+    #main_container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #content{
+        width: 95%;
+        margin-top: 10px;
+    }
+
+    .ButtonDayNight{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 15%;
+    }
+
+    @media (max-height: 725px) {
+        body {
+          overflow-y: scroll;
+        }
+    }
+}
+
+@media (max-height: 700px) {
+    #content{
+        overflow-y: scroll;
+    }
+    #bracket{
+        height: 520px;
+    }
+}
+
+@media (max-width: 1200px) {
+    table {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    table {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    table th, table td{
+        min-width: 35px;
+        padding: 5px;
+        margin: 0;
+        text-align: center;
+    }
+
+    #poules{
+        overflow-x: scroll;
+        justify-content: flex-start;
+    }
+
+    .menu a, .menu p{
+        font-size: 12px;
+    }
 }

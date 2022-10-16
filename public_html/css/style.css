@@ -4,6 +4,10 @@
 }
 
 body{
+  overflow: hidden;
+}
+
+body{
   background-color: rgb(37, 37, 37);
 }
 
@@ -19,13 +23,6 @@ body{
   .container{
     display: grid;
       position: relative;
-  }
-
-  .ButtonDayNight{
-    position: absolute;
-    top: 2%;
-    right: 3%;
-    width: 10%;
   }
 
   img { 
@@ -56,13 +53,6 @@ body{
     float: left;
     display: flex;
     align-items: center;
-  }
-
-  .ButtonDayNight{
-    position: absolute;
-    bottom: 3%;
-    left: 1%;
-    width: 4.5%;
   }
 
   img { 
