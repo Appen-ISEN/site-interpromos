@@ -76,6 +76,7 @@ $match_types = array(
     "4" => "Petite finale",
     "5" => "Huitième de finale",
     "6" => "Seizième de finale",
+    "7" => "Poules 2",
 );
 
 ?>

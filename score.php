@@ -18,9 +18,11 @@
     }
 
     $allteams = $db->getTeams();
-    $teams_poules = array();
+    $teams_poules1 = array();
+    $teams_poules2 = array();
 
-    $matchs_poules = array();
+    $matchs_poules1 = array();
+    $matchs_poules2 = array();
     $matchs_eight = array();
     $matchs_quarters = array();
     $matchs_semis = array();
@@ -103,7 +105,7 @@
             if(strtolower($match["sport_name"]) == strtolower($sport)){
                 switch($match["type"]){
                     case 0:
-                        array_push($matchs_poules, $match);
+                        array_push($matchs_poules1, $match);
                         break;
                     case 1:
                         array_push($matchs_final, $match);
@@ -117,6 +119,9 @@
                     case 4:
                         array_push($matchs_little_final, $match);
                         break;
+                    case 7:
+                        array_push($matchs_poules2, $match);
+                        break;
                     default:
                         break;
                 }
@@ -125,14 +130,23 @@
     }
 
     foreach($allteams as $team){
-        $found = false;
-        foreach($matchs_poules as $match){
+        $found1 = false;
+        $found2 = false;
+        foreach($matchs_poules1 as $match){
             if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
-                $found = true;
+                $found1 = true;
             }
         }
-        if($found){
-            array_push($teams_poules, $team);
+        foreach($matchs_poules2 as $match){
+            if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
+                $found2 = true;
+            }
+        }
+        if($found1){
+            array_push($teams_poules1, $team);
+        }
+        if($found2){
+            array_push($teams_poules2, $team);
         }
     }
 ?>
@@ -861,9 +875,9 @@
                     <table class="color-main">
                         <thead>
                             <tr class="bgcolor-tableprimary">
-                                <th class="bordercolor-main bold"></th>
+                                <th class="bordercolor-main bold">Poule A</th>
                                 <?php
-                                    foreach ($teams_poules as $team) {
+                                    foreach ($teams_poules1 as $team) {
                                         echo "<th class=\"bordercolor-main\">".$team["name"]."</th>";
                                     }
                                 ?>
@@ -873,18 +887,70 @@
                             
                             <?php
                                 $i = 0;
-                                foreach ($teams_poules as $team) {
+                                foreach ($teams_poules1 as $team) {
                                     $color = "primary";
                                     if($i%2 == 0){
                                         $color = "secondary";
                                     }
                                     echo "<tr class=\"bgcolor-table".$color."\">";
                                     echo "<td class=\"bordercolor-main bold\">".$team["name"]."</td>";
-                                        foreach($teams_poules as $team2){
+                                        foreach($teams_poules1 as $team2){
                                             echo "<td class=\"bordercolor-main\">";
                                             if($team2 != $team){
                                                 $found = false;
-                                                foreach($matchs_poules as $match){
+                                                foreach($matchs_poules1 as $match){
+                                                    if(json_decode($match["teams_id"])[1] == $team["id"] && json_decode($match["teams_id"])[0] == $team2["id"]){
+                                                        echo json_decode($match["scores"])[1]." - ".json_decode($match["scores"])[0];
+                                                        $found = true;
+                                                    }
+                                                    if(json_decode($match["teams_id"])[0] == $team["id"] && json_decode($match["teams_id"])[1] == $team2["id"]){
+                                                        echo json_decode($match["scores"])[0]." - ".json_decode($match["scores"])[1];
+                                                        $found = true;
+                                                    }
+                                                }
+                                                if(!$found){
+                                                    echo "-";
+                                                }
+                                            }
+                                            else{
+                                                echo "X";
+                                            }
+                                            echo "</td>";
+                                        }
+                                    echo "</tr>";
+                                    $i++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <table class="color-main">
+                        <thead>
+                            <tr class="bgcolor-tableprimary">
+                                <th class="bordercolor-main bold">Poule B</th>
+                                <?php
+                                    foreach ($teams_poules2 as $team) {
+                                        echo "<th class=\"bordercolor-main\">".$team["name"]."</th>";
+                                    }
+                                ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <?php
+                                $i = 0;
+                                foreach ($teams_poules2 as $team) {
+                                    $color = "primary";
+                                    if($i%2 == 0){
+                                        $color = "secondary";
+                                    }
+                                    echo "<tr class=\"bgcolor-table".$color."\">";
+                                    echo "<td class=\"bordercolor-main bold\">".$team["name"]."</td>";
+                                        foreach($teams_poules2 as $team2){
+                                            echo "<td class=\"bordercolor-main\">";
+                                            if($team2 != $team){
+                                                $found = false;
+                                                foreach($matchs_poules2 as $match){
                                                     if(json_decode($match["teams_id"])[1] == $team["id"] && json_decode($match["teams_id"])[0] == $team2["id"]){
                                                         echo json_decode($match["scores"])[1]." - ".json_decode($match["scores"])[0];
                                                         $found = true;
