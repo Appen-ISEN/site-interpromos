@@ -1,3 +1,8 @@
+function parseISOLocal(s) {
+    var b = s.split(/\D/);
+    return new Date(b[0], b[1]+2, b[2], b[3], b[4], b[5]);
+}
+
 function getDirect() {
     $.ajax({
         method: "GET",
@@ -8,9 +13,13 @@ function getDirect() {
 }
 
 function aspect(matchs) {
+    $("#nextMatch").empty()
+    $("#nowMatch").empty()
+
     matchs.forEach(match => {
-        //show next matches with a gap of 15 min
-        if(Date.parse(match['date']) > Date.now() && Date.parse(match['date']) < (Date.now() + 900000)){
+        let date = parseISOLocal(match['date'])
+        //show next matches with a gap of 20 min
+        if(date > Date.now() && date < (Date.now() + 1200000)){
             let tname = JSON.parse(match['teams_name'])
 
             let cap = "<div class=\"capsule\">"+
@@ -22,8 +31,8 @@ function aspect(matchs) {
 
             $("#nextMatch").append(cap);
         }
-        //show direct match with a gap of 15 min
-        if(Date.parse(match['date']) < Date.now() && Date.parse(match['date']) > (Date.now() - 900000)){
+        //show direct match with a gap of 20 min 
+        if(date < Date.now() && date > (Date.now() - 1200000)){
             let tname = JSON.parse(match['teams_name'])
             let tscore = JSON.parse(match['scores'])
 
@@ -41,5 +50,5 @@ function aspect(matchs) {
     });
 }
 
-getDirect()
-setInterval(getDirect, 300000);
+getDirect();
+setInterval(getDirect, 5000 );

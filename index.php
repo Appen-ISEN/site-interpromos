@@ -33,13 +33,19 @@
                 </div>
                 <hr>
                 <div class="match_list">
-                    <div class="list" id="nowMatch">
+                    <div class="list">
                         <h3>Match(s) en cours :</h3>
                         <hr>
+                        <div id="nowMatch">
+
+                        </div>
                     </div>
-                    <div class="list" id="nextMatch">
+                    <div class="list">
                         <h3>Futurs Matchs :</h3>
                         <hr>
+                        <div id="nextMatch">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
