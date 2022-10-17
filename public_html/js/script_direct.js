@@ -17,7 +17,7 @@ function aspect(matchs) {
     $("#nowMatch").empty()
 
     matchs.forEach(match => {
-        let date = parseISOLocal(match['date'])
+        let date = new Date(match['date']);
         //show next matches with a gap of 20 min
         if(date > Date.now() /*&& date < (Date.now() + 1200000)*/){
             let tname = JSON.parse(match['teams_name'])
