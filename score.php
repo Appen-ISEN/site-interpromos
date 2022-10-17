@@ -566,8 +566,10 @@
                                         break;
                                     case 2:
                                         $jj = 0;
+                                        break;
                                     case 3:
                                         $jj = 3;
+                                        break;
                                 }
                                 if(sizeof($matchs_quarters[$k-1]) >= $jj + 1){
                                     $team1;
