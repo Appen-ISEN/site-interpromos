@@ -714,10 +714,10 @@
 
                                 echo "<div class=\"team";
                                 if(json_decode($matchs_final[$k-1][0]["scores"])[0] > json_decode($matchs_final[$k-1][0]["scores"])[1]){
-                                    echo " gold-medal winner";
+                                    echo " winner";
                                 }
                                 elseif(json_decode($matchs_final[$k-1][0]["scores"])[0] < json_decode($matchs_final[$k-1][0]["scores"])[1]){
-                                    echo " silver-medal loser";
+                                    echo " loser";
                                 }
                                 echo "\">";
                                 echo "<p class=\"team-name\">".$team1["name"]."</p>";
@@ -726,10 +726,10 @@
 
                                 echo "<div class=\"team";
                                 if(json_decode($matchs_final[$k-1][0]["scores"])[1] > json_decode($matchs_final[$k-1][0]["scores"])[0]){
-                                    echo " gold-medal winner";
+                                    echo " winner";
                                 }
                                 elseif(json_decode($matchs_final[$k-1][0]["scores"])[1] < json_decode($matchs_final[$k-1][0]["scores"])[0]){
-                                    echo " silver-medal loser";
+                                    echo " loser";
                                 }
                                 echo "\">";
                                 echo "<p class=\"team-name\">".$team2["name"]."</p>";
