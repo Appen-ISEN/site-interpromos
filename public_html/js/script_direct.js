@@ -19,7 +19,7 @@ function aspect(matchs) {
     matchs.forEach(match => {
         let date = parseISOLocal(match['date'])
         //show next matches with a gap of 20 min
-        if(date > Date.now() && date < (Date.now() + 1200000)){
+        if(date > Date.now() /*&& date < (Date.now() + 1200000)*/){
             let tname = JSON.parse(match['teams_name'])
 
             let cap = "<div class=\"capsule\">"+
