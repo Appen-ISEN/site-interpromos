@@ -7,7 +7,6 @@
 .list {
     margin-right: 5%;
     width: 30%;
-    overflow-y: scroll;
 }
 
 .capTeam {
@@ -25,4 +24,8 @@
 
 .capTeam > h4 {
     margin-top: 15%;
+}
+
+body{
+    overflow: auto;
 }
