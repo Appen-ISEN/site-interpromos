@@ -19,7 +19,7 @@ function aspect(matchs) {
     matchs.forEach(match => {
         let date = new Date(match['date']);
         //show next matches with a gap of 20 min
-        if(date > Date.now() /*&& date < (Date.now() + 1200000)*/){
+        if(date > (Date.now() - 1200000) /*&& date < (Date.now() + 1200000)*/){
             let tname = JSON.parse(match['teams_name'])
 
             let cap = "<div class=\"capsule\">"+
@@ -32,7 +32,7 @@ function aspect(matchs) {
             $("#nextMatch").append(cap);
         }
         //show direct match with a gap of 20 min 
-        if(date < Date.now() && date > (Date.now() - 1800000)){
+        if(date < (Date.now() - 1200000) && date > ((Date.now() - 1200000) - 1800000)){
             let tname = JSON.parse(match['teams_name'])
             let tscore = JSON.parse(match['scores'])
 
