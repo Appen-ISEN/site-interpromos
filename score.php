@@ -551,57 +551,59 @@
                         <?php
                             $del_elems = 0; // SOMETHING THAT WOULD BE USELESS IN THE FUTUR <--------------------------------------------
                             for($i = 0; $i < 4; $i++){
+                                $jj = 0;
                                 echo "<div class=\"match";
                                 if($i == 3){
                                     echo " no-margin";
                                 }
                                 echo "\">";
-                                if($i != 1 && $i != 2){ // SOMETHING THAT WOULD BE USELESS IN THE FUTUR ---------------------------------
-                                    $del_elems++;
-                                    echo "<div class=\"team\">";
-                                    echo "<p class=\"team-name\">-</p>";
-                                    echo "<p class=\"team-score\">-</p>";
-                                    echo "</div>";
-                                    echo "<div class=\"team\">";
-                                    echo "<p class=\"team-name\">-</p>";
-                                    echo "<p class=\"team-score\">-</p>";
-                                    echo "</div>";
+                                switch($i){
+                                    case 0:
+                                        $jj = 1;
+                                        break;
+                                    case 1:
+                                        $jj = 2;
+                                        break;
+                                    case 2:
+                                        $jj = 0;
+                                    case 3:
+                                        $jj = 3;
                                 }
-                                elseif(sizeof($matchs_quarters[$k-1]) >= $i - $del_elems + 1){
+                                if(sizeof($matchs_quarters[$k-1]) >= $jj + 1){
                                     $team1;
                                     $team2;
                                     foreach($allteams as $team){
-                                        if($team["id"] == json_decode($matchs_quarters[$k-1][$i - $del_elems]["teams_id"])[0]){
+                                        if($team["id"] == json_decode($matchs_quarters[$k-1][$jj]["teams_id"])[0]){
                                             $team1 = $team;
                                         }
-                                        if($team["id"] == json_decode($matchs_quarters[$k-1][$i - $del_elems]["teams_id"])[1]){
+                                        if($team["id"] == json_decode($matchs_quarters[$k-1][$jj]["teams_id"])[1]){
                                             $team2 = $team;
                                         }
                                     }
 
 
                                     echo "<div class=\"team";
-                                    if(json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[0] > json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[1]){
+                                    if(json_decode($matchs_quarters[$k-1][$jj]["scores"])[0] > json_decode($matchs_quarters[$k-1][$jj]["scores"])[1]){
                                         echo " winner";
                                     }
-                                    elseif(json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[0] < json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[1]){
+                                    elseif(json_decode($matchs_quarters[$k-1][$jj]["scores"])[0] < json_decode($matchs_quarters[$k-1][$jj]["scores"])[1]){
                                         echo " loser";
                                     }
                                     echo "\">";
                                     echo "<p class=\"team-name\">".$team1["name"]."</p>";
-                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[0]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k-1][$jj]["scores"])[0]."</p>";
                                     echo "</div>";
 
                                     echo "<div class=\"team";
-                                    if(json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[1] > json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[0]){
+                                    if(json_decode($matchs_quarters[$k-1][$jj]["scores"])[1] > json_decode($matchs_quarters[$k-1][$jj]["scores"])[0]){
                                         echo " winner";
                                     }
-                                    elseif(json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[1] < json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[0]){
+                                    elseif(json_decode($matchs_quarters[$k-1][$jj]["scores"])[1] < json_decode($matchs_quarters[$k-1][$jj]["scores"])[0]){
                                         echo " loser";
                                     }
                                     echo "\">";
                                     echo "<p class=\"team-name\">".$team2["name"]."</p>";
-                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k-1][$i - $del_elems]["scores"])[1]."</p>";
+                                    echo "<p class=\"team-score\">".json_decode($matchs_quarters[$k-1][$jj]["scores"])[1]."</p>";
                                     echo "</div>";
                                 }
                                 else{
