@@ -177,6 +177,7 @@
                     <a href="score.php?sport=badminton" class="color-main<?php if($sport == "badminton"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Badminton</a>
                     <a href="score.php?sport=volley" class="color-main<?php if($sport == "volley"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Volley</a>
                     <a href="score.php?sport=futsal" class="color-main<?php if($sport == "futsal"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Futsal</a>
+                    <a href="score.php?sport=leaderboard" class="bold color-main<?php if($sport == "leaderboard"){ echo " active";} else{ echo " bgcolor-btnprimary";} ?>">Classements</a>
                 </div>
                 <hr>
                 <div class="horizontal_menu menu" id="phase">

@@ -29,7 +29,8 @@
                     <a href="score.php?sport=handball" class="color-main bgcolor-btnprimary">Handball</a>
                     <a href="score.php?sport=badminton" class="color-main bgcolor-btnprimary">Badminton</a>
                     <a href="score.php?sport=volley" class="color-main bgcolor-btnprimary">Volley</a>
-                    <a href="score.php?sport=futsal" class="color-main bgcolor-btnprimary">Futsal</a>        
+                    <a href="score.php?sport=futsal" class="color-main bgcolor-btnprimary">Futsal</a>
+                    <a href="score.php?sport=leaderboard" class="bold color-main">Classements</a>        
                 </div>
                 <hr>
                 <div class="match_list">
