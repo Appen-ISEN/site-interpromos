@@ -11,12 +11,11 @@
 
     $db = new Database();
     
-
     $sport = "";
     if(isset($_GET["sport"])){
         $sport = $_GET["sport"];
     }
-
+    
     $allteams = $db->getTeams();
     $teams_poules1 = array();
     $teams_poules2 = array();
@@ -28,126 +27,139 @@
     $matchs_semis = array();
     $matchs_final = array();
     $matchs_little_final = array();
-    if($sport == "badminton"){
-        $matchs_eight1 = array();
-        $matchs_eight2 = array();
-        $matchs_quarters1 = array();
-        $matchs_quarters2 = array();
-        $matchs_semis1 = array();
-        $matchs_semis2 = array();
-        $matchs_final1 = array();
-        $matchs_final2 = array();
-        $matchs_final3 = array();   
-        foreach($db->getMatches() as $match){
-            if(strtolower($match["sport_name"]) == strtolower($sport)."1"){
-                switch($match["type"]){
-                    case 0:
-                        break;
-                    case 1:
-                        array_push($matchs_final3, $match);
-                        break;
-                    case 2:
-                        array_push($matchs_final1, $match);
-                        break;
-                    case 3:
-                        array_push($matchs_semis1, $match);
-                        break;
-                    case 4:
-                        array_push($matchs_little_final, $match);
-                        break;
-                    case 5:
-                        array_push($matchs_quarters1, $match);
-                        break;
-                    case 6:
-                        array_push($matchs_eight1, $match);
-                        break;
-                    default:
-                        break;
+
+    if($sport != "leaderboard"){
+        if($sport == "badminton"){ 
+            $matchs_eight1 = array();
+            $matchs_eight2 = array();
+            $matchs_quarters1 = array();
+            $matchs_quarters2 = array();
+            $matchs_semis1 = array();
+            $matchs_semis2 = array();
+            $matchs_final1 = array();
+            $matchs_final2 = array();
+            $matchs_final3 = array(); 
+            foreach($db->getMatches() as $match){
+                if(strtolower($match["sport_name"]) == strtolower($sport)."1"){
+                    switch($match["type"]){
+                        case 0:
+                            break;
+                        case 1:
+                            array_push($matchs_final3, $match);
+                            break;
+                        case 2:
+                            array_push($matchs_final1, $match);
+                            break;
+                        case 3:
+                            array_push($matchs_semis1, $match);
+                            break;
+                        case 4:
+                            array_push($matchs_little_final, $match);
+                            break;
+                        case 5:
+                            array_push($matchs_quarters1, $match);
+                            break;
+                        case 6:
+                            array_push($matchs_eight1, $match);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if(strtolower($match["sport_name"]) == strtolower($sport)."2"){
+                    switch($match["type"]){
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            array_push($matchs_final2, $match);
+                            break;
+                        case 3:
+                            array_push($matchs_semis2, $match);
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            array_push($matchs_quarters2, $match);
+                            break;
+                        case 6:
+                            array_push($matchs_eight2, $match);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-            if(strtolower($match["sport_name"]) == strtolower($sport)."2"){
-                switch($match["type"]){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        array_push($matchs_final2, $match);
-                        break;
-                    case 3:
-                        array_push($matchs_semis2, $match);
-                        break;
-                    case 4:
-                        break;
-                    case 5:
-                        array_push($matchs_quarters2, $match);
-                        break;
-                    case 6:
-                        array_push($matchs_eight2, $match);
-                        break;
-                    default:
-                        break;
+            array_push($matchs_eight, $matchs_eight1);
+            array_push($matchs_eight, $matchs_eight2);
+            array_push($matchs_quarters, $matchs_quarters1);
+            array_push($matchs_quarters, $matchs_quarters2);
+            array_push($matchs_semis, $matchs_semis1);
+            array_push($matchs_semis, $matchs_semis2);
+            array_push($matchs_final, $matchs_final1);
+            array_push($matchs_final, $matchs_final2);
+            array_push($matchs_final, $matchs_final3);
+        }
+        else{
+            foreach($db->getMatches() as $match){
+                if(strtolower($match["sport_name"]) == strtolower($sport)){
+                    switch($match["type"]){
+                        case 0:
+                            array_push($matchs_poules1, $match);
+                            break;
+                        case 1:
+                            array_push($matchs_final, $match);
+                            break;
+                        case 2:
+                            array_push($matchs_semis, $match);
+                            break;
+                        case 3:
+                            array_push($matchs_quarters, $match);
+                            break;
+                        case 4:
+                            array_push($matchs_little_final, $match);
+                            break;
+                        case 7:
+                            array_push($matchs_poules2, $match);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
-        array_push($matchs_eight, $matchs_eight1);
-        array_push($matchs_eight, $matchs_eight2);
-        array_push($matchs_quarters, $matchs_quarters1);
-        array_push($matchs_quarters, $matchs_quarters2);
-        array_push($matchs_semis, $matchs_semis1);
-        array_push($matchs_semis, $matchs_semis2);
-        array_push($matchs_final, $matchs_final1);
-        array_push($matchs_final, $matchs_final2);
-        array_push($matchs_final, $matchs_final3);
+
+        foreach($allteams as $team){
+            $found1 = false;
+            $found2 = false;
+            foreach($matchs_poules1 as $match){
+                if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
+                    $found1 = true;
+                }
+            }
+            foreach($matchs_poules2 as $match){
+                if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
+                    $found2 = true;
+                }
+            }
+            if($found1){
+                array_push($teams_poules1, $team);
+            }
+            if($found2){
+                array_push($teams_poules2, $team);
+            }
+        }
     }
     else{
-        foreach($db->getMatches() as $match){
-            if(strtolower($match["sport_name"]) == strtolower($sport)){
-                switch($match["type"]){
-                    case 0:
-                        array_push($matchs_poules1, $match);
-                        break;
-                    case 1:
-                        array_push($matchs_final, $match);
-                        break;
-                    case 2:
-                        array_push($matchs_semis, $match);
-                        break;
-                    case 3:
-                        array_push($matchs_quarters, $match);
-                        break;
-                    case 4:
-                        array_push($matchs_little_final, $match);
-                        break;
-                    case 7:
-                        array_push($matchs_poules2, $match);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-    foreach($allteams as $team){
-        $found1 = false;
-        $found2 = false;
-        foreach($matchs_poules1 as $match){
-            if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
-                $found1 = true;
-            }
-        }
-        foreach($matchs_poules2 as $match){
-            if(json_decode($match["teams_id"])[0] == $team["id"] || json_decode($match["teams_id"])[1] == $team["id"]){
-                $found2 = true;
-            }
-        }
-        if($found1){
-            array_push($teams_poules1, $team);
-        }
-        if($found2){
-            array_push($teams_poules2, $team);
-        }
+        $leader = array(
+            "A1" => array(0, 0, 0, 0, 0, 0, 0, 1),
+            "A2" => array(0, 0, 0, 0, 0, 0, 0, 5),
+            "A3" => array(0, 0, 0, 0, 0, 0, 0, 2),
+            "A4" => array(0, 0, 0, 0, 0, 0, 0, 4),
+            "A5" => array(0, 0, 0, 0, 0, 0, 0, 6),
+            "Permanents" => array(0, 0, 0, 0, 0, 0, 0, 3)
+        );
     }
 ?>
 
@@ -187,7 +199,7 @@
                                 <p id=\"group2-button\" class=\"bgcolor-btnprimary color-main\">Éliminatoires, groupe 2</p>
                                 <p id=\"final-button\" class=\"bgcolor-btnprimary color-main\">Finales</p>";
                         }
-                        else{
+                        elseif($sport != "leaderboard"){
                             echo "<p id=\"group-phase-button\" class=\"bgcolor-btnprimary color-main active\">Phases de poule</p>
                                 <p id=\"bracket-phase-button\" class=\"bgcolor-btnprimary color-main\">Phases éliminatoires</p>";
                         }
@@ -195,7 +207,7 @@
                 </div>
 
                 <?php
-                    if($sport != "badminton"){
+                    if($sport != "badminton" && $sport != "leaderboard"){
                 ?>
 
                 <div class="frame bracket" id="bracket"> <!-- --------------------------------------------------------------------------------------------------- -->
@@ -456,7 +468,7 @@
 
                 <?php
                     }
-                    else{
+                    elseif($sport != "leaderboard"){
                         for($k = 1; $k < 3; $k++){
                 ?>
 
@@ -873,7 +885,8 @@
                 </div>
 
                 <?php
-                    }            
+                    }
+                    if($sport != "leaderboard"){
                 ?>
 
                 <div class="frame bgcolor-main" id="poules"> <!-- --------------------------------------------------------------------------------------------------- -->
@@ -981,6 +994,77 @@
                         </tbody>
                     </table>
                 </div>
+
+                <?php
+                    }
+                    else{
+                ?>
+
+                <div class="frame bgcolor-main" id="poules">
+                    <table class="color-main">
+                        <thead>
+                            <tr class="bgcolor-tableprimary">
+                                <th class="bordercolor-main bold"></th>
+                                <th class="bordercolor-main bold">Badminton</th>
+                                <th class="bordercolor-main bold">Futsal</th>
+                                <th class="bordercolor-main bold">Basket</th>
+                                <th class="bordercolor-main bold">Handball</th>
+                                <th class="bordercolor-main bold">Volley</th>
+                                <th class="bordercolor-main bold">Bear & Run</th>
+                                <th class="bordercolor-main bold">TOTAL</th>
+                                <th class="bordercolor-main bolder color-red">Rang</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <?php
+                                $i = 0;
+                                foreach($leader as $key => $values){
+                                    if($i % 2 == 0){
+                                        echo "<tr class=\"bgcolor-tablesecondary\">";
+                                    }
+                                    else{
+                                        echo "<tr class=\"bgcolor-tableprimary\">";
+                                    }
+
+                                    echo "<th class=\"bordercolor-main bold\">".$key."</th>";
+                                    
+                                    $j = 0;
+                                    foreach($values as $val){
+                                        if($j != 7){
+                                            echo "<td class=\"bordercolor-main\">".$val."</td>";
+                                        }
+                                        else{
+                                            $rank = "";
+                                            switch($val){
+                                                case 1:
+                                                    $rank = " gold-leader";
+                                                    break;
+                                                case 2:
+                                                    $rank = " silver-leader";
+                                                    break;
+                                                case 3:
+                                                    $rank = " bronze-leader";
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                            echo "<td class=\"bordercolor-main bold".$rank."\">#".$val."</td>";
+                                        }
+                                        $j++;
+                                    }
+                                    echo "</tr>";
+                                    $i++;
+                                }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <?php
+                    }
+                ?>
 
             </div>
         </div>
