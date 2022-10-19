@@ -37,8 +37,17 @@
 
 .menu a.active, .menu p.active {
     background-color: #a62020;
+}*
+
+.color-red{
+    color: #f03b3b;
 }
 
 .bold{
     font-weight: bold;
+}
+
+.bolder{
+    font-weight: bolder;
+    text-decoration: underline;
 }
