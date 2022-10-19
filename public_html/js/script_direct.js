@@ -21,13 +21,16 @@ function aspect(matchs) {
         //show next matches with a gap of 20 min
         if(date > (Date.now() - 2700000) /*&& date < (Date.now() + 1200000)*/){
             let tname = JSON.parse(match['teams_name'])
+            let time = match['date'].split(/\D/);
+            let hour = parseInt(time[3])+2;
+            let min = time[4];
 
             let cap = "<div class=\"capsule\">"+
             "<div class=\"capTeam\">"+
             "<h3>"+ tname[0] +"</h3></div>"+
             "<div class=\"capTeam\">"+
-            "<h3>"+ tname[1] +"</h3></div>"+
-            match['sport_name'] +"</div>";
+            "<h3>"+ tname[1] +"</h3></div><p>"+
+            match['sport_name'] + " à " + hour +":"+ min +"</p></div>";
 
             $("#nextMatch").append(cap);
         }
