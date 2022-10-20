@@ -153,12 +153,12 @@
     }
     else{
         $leader = array(
-            "A1" => array(0, 0, 0, 0, 0, 0, 0, 1),
-            "A2" => array(0, 0, 0, 0, 0, 0, 0, 5),
-            "A3" => array(0, 0, 0, 0, 0, 0, 0, 2),
-            "A4" => array(0, 0, 0, 0, 0, 0, 0, 4),
-            "A5" => array(0, 0, 0, 0, 0, 0, 0, 6),
-            "Permanents" => array(0, 0, 0, 0, 0, 0, 0, 3)
+            "A1" => array(2, 10, 10, 3, 1, 3, 1, 30, 4),
+            "A2" => array(5, 7, 5, 5, 7, 7, 3, 39, 3),
+            "A3" => array(7, 5, 7, 10, 5, 7, 2, 43, 1),
+            "A4" => array(10, 3, 3, 7, 10, 10, 0, 43, 1),
+            "A5" => array(1, 0, 0, 0, 0, 0, 0, 1, 6),
+            "Permanents" => array(0, 0, 0, 0, 0, 0, 0, 2, 5)
         );
     }
 ?>
@@ -1011,6 +1011,7 @@
                                 <th class="bordercolor-main bold">Handball</th>
                                 <th class="bordercolor-main bold">Volley</th>
                                 <th class="bordercolor-main bold">Bear & Run</th>
+                                <th class="bordercolor-main bold">Spectateurs</th>
                                 <th class="bordercolor-main bold">TOTAL</th>
                                 <th class="bordercolor-main bolder color-red">Rang</th>
                             </tr>
@@ -1031,7 +1032,7 @@
                                     
                                     $j = 0;
                                     foreach($values as $val){
-                                        if($j != 7){
+                                        if($j != 8){
                                             echo "<td class=\"bordercolor-main\">".$val."</td>";
                                         }
                                         else{
